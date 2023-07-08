@@ -1,0 +1,55 @@
+<header class="fixed right-0 left-0 z-20 shadow-md transition shadow-slate-900/50 bg-gradient-to-tr from-slate-950/95 to-slate-900/95" x-data="{mainMenu: false}">
+    <div class="mx-auto max-w-7xl">
+        <div class="px-6 lg:ml-[300px]">
+            <div class="flex h-16 justify-between">
+                <button class="z-50 cursor-pointer text-4xl text-white lg:hidden" @click="mainMenu = !mainMenu">
+                  <span class="flex rounded-md bg-slate-800 p-2 transition hover:bg-slate-700">
+                      <svg viewBox="0 0 24 24" stroke-width="2.3" class="h-6 w-6 stroke-slate-100">
+                          <path x-show="!mainMenu" stroke-linecap="round" stroke-linejoin="round"
+                                d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/>
+                          <path x-show="mainMenu" stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                      </svg>
+                  </span>
+                </button>
+                <div class="flex items-center justify-center lg:w-full lg:px-0">
+                    <a href="{{ path('app_home') }}" class="hidden text-white text-2xl lg:flex items-center font-rajdhani">
+                        <span>RessourceBook</span>
+                        <svg class="fill-white w-8 ml-4" viewBox="0 0 576 512"><path d="M542.22 32.05c-54.8 3.11-163.72 14.43-230.96 55.59-4.64 2.84-7.27 7.89-7.27 13.17v363.87c0 11.55 12.63 18.85 23.28 13.49 69.18-34.82 169.23-44.32 218.7-46.92 16.89-.89 30.02-14.43 30.02-30.66V62.75c.01-17.71-15.35-31.74-33.77-30.7zM264.73 87.64C197.5 46.48 88.58 35.17 33.78 32.05 15.36 31.01 0 45.04 0 62.75V400.6c0 16.24 13.13 29.78 30.02 30.66 49.49 2.6 149.59 12.11 218.77 46.95 10.62 5.35 23.21-1.94 23.21-13.46V100.63c0-5.29-2.62-10.14-7.27-12.99z"/></svg>
+                    </a>
+                </div>
+                <div class="flex flex-1 items-center justify-center px-2 sm:inset-0">
+                    <a href="{{ path('app_home') }}" class="text-white text-2xl flex lg:hidden items-center font-rajdhani">
+                        <span>RessourceBook</span>
+                        <svg class="fill-white w-8 ml-4" viewBox="0 0 576 512"><path d="M542.22 32.05c-54.8 3.11-163.72 14.43-230.96 55.59-4.64 2.84-7.27 7.89-7.27 13.17v363.87c0 11.55 12.63 18.85 23.28 13.49 69.18-34.82 169.23-44.32 218.7-46.92 16.89-.89 30.02-14.43 30.02-30.66V62.75c.01-17.71-15.35-31.74-33.77-30.7zM264.73 87.64C197.5 46.48 88.58 35.17 33.78 32.05 15.36 31.01 0 45.04 0 62.75V400.6c0 16.24 13.13 29.78 30.02 30.66 49.49 2.6 149.59 12.11 218.77 46.95 10.62 5.35 23.21-1.94 23.21-13.46V100.63c0-5.29-2.62-10.14-7.27-12.99z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed top-16 bottom-0 overflow-y-scroll opacity-0 shadow-slate-400/50 transition-all duration-300 bg-slate-950/95 translate-x-[-300px] w-[300px] shadow-r-md lg:translate-x-0 lg:opacity-100"
+         :class="{'!translate-x-0 !opacity-100': mainMenu}"
+    >
+        <nav>
+            <div class="mt-8 px-4">
+                <ul class="flex flex-col gap-3 [&>*]:font-semibold [&>*]:text-slate-100 [&>*]:cursor-pointer [&>*]:border-l-4 [&>*]:border-l-transparent [&>*]:transition-all [&>*]:duration-300 [&>*]:p-2.5 hover:[&>*]:border-l-red-500 hover:[&>*]:px-4">
+                    <li class="border-b border-b-slate-700">
+                        <a href="{{ path('app_home') }}">Home</a>
+                    </li>
+                    <li>
+                        <a href="#">Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_article_index') }}">Articles</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_category_index') }}">Categories</a>
+                    </li>
+                    <li class="border-t border-t-slate-700 hover:text-red-500">
+                        <a href="#">Déconnexion</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>

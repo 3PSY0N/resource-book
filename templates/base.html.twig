@@ -1,19 +1,25 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block pageTitle %}RessourceBook - {% block title %}{% endblock %}{% endblock %}</title>
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+    <link rel="icon" href="{{ asset('assets/img/favicon.svg') }}" type="image/svg+xml">
+
+    {% block stylesheets %}
+        {{ vite_entry_link_tags('app') }}
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ vite_entry_script_tags('app') }}
+    {% endblock %}
+
+</head>
+<body class="flex flex-col min-h-[100dvh] bg-slate-300 max-w-screen-qhd lg:ml-[300px]">
+{% include '_partials/navbar.html.twig' %}
+
+{% block body %}<main class="mx-auto mt-16 w-full max-w-screen-lg grow p-4">No html found</main>{% endblock %}
+
+{% include '_partials/footer.html.twig' %}
+</body>
 </html>

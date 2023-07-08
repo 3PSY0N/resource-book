@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% set routeName = app.request.attributes.get('_route') %}
+
+{% block body %}
+    <main class="mx-auto mt-16 w-full max-w-screen-lg grow p-4">
+
+        <h1 class="my-12 text-center text-5xl font-medium text-slate-900 font-rajdhani">Ressources</h1>
+
+        <section class="mx-auto md:w-10/12 xl:w-6/12">
+            <form method="get" action="{{ path('app_search') }}">
+                <label for="default-search" class="sr-only mb-2 text-sm font-medium text-gray-300">Search</label>
+                <div class="relative">
+                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                        <svg aria-hidden="true" class="h-5 w-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                    <input type="search" id="default-search" name="q" class="block w-full rounded-lg border border-slate-200 bg-gradient-to-tr from-slate-100 to-slate-300 p-4 pl-10 text-sm text-slate-600 transition focus:border-slate-400 focus:ring-slate-500" placeholder="Search articles...">
+                    <button type="submit" class="absolute rounded-lg px-4 py-2 text-sm font-medium text-slate-900 transition right-2.5 bottom-2.5 hover:bg-indigo-500 hover:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">Search</button>
+                </div>
+            </form>
+
+            <div class="mt-4 text-center font-light text-slate-900">
+                {% if routeName == 'app_search' %}
+                    {{ articles.getTotalItemCount }} results found.
+                {% endif %}
+            </div>
+        </section>
+
+        <section class="mt-24 flex flex-col gap-8">
+            {% if routeName == 'app_search'%}
+                {% for article in articles %}
+                    <article class="relative rounded-lg border border-slate-200 bg-gradient-to-tr from-slate-100 to-slate-300 p-4 transition-all duration-300 hover:bg-slate-100 hover:shadow-md">
+                        <header>
+                            <h2 class="text-lg hover:text-indigo-500 transition"><a href="{{ path('app_article_show', { slug: article.slug }) }}">{{ article.title }}</a></h2>
+                        </header>
+                        <footer class="text-xs flex flex-col mt-4">
+                            <div class="grow flex flex-wrap gap-1">
+
+                                {% for category in article.categories %}
+                                    {% if category.bgcolor or category.fgcolor %}
+                                        <span class="text-xs badge badge-color" style="--badge-bg: {{ category.bgcolor }}; --badge-fg: {{ category.fgcolor }};">{{ category.name|upper }}</span>
+                                    {% else %}
+                                        <span class="text-xs badge badge-color">{{ category.name|upper }}</span>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <div class="flex mt-4 text-slate-400 justify-end">
+                                <span>Published: <time datetime="{{ article.createdAt|date("c", "Europe/Paris") }}">{{ article.createdAt|date("m/d/y - H:i", "Europe/Paris") }}</time></span>
+                            </div>
+                        </footer>
+                    </article>
+                {% endfor %}
+            {% else %}
+                {% for data in articles %}
+                    <article class="relative rounded-lg border border-slate-200 bg-slate-200 p-4 transition-all duration-300 hover:bg-slate-100 hover:shadow-md">
+                        <header>
+                            <h2 class="text-lg hover:text-indigo-500 transition"><a href="{{ path('app_article_show', { slug: data.article.slug }) }}">{{ data.article.title }}</a></h2>
+                        </header>
+                        {% if data.article.headingContent %}
+                        <p class="text-sm mt-4 font-light">
+                            {{ data.article.headingContent|striptags|length > 250 ? data.article.headingContent|slice(0, 250) ~ '...' : data.article.headingContent|striptags }}
+                        </p>
+                        {% endif %}
+                        <footer class="text-xs flex flex-col mt-4">
+                            <div class="grow flex flex-wrap gap-1">
+                                {% for category in data.categories %}
+                                    {% if category.bgcolor or category.fgcolor %}
+                                        <span class="text-xs badge badge-color" style="--badge-bg: {{ category.bgcolor }}; --badge-fg: {{ category.fgcolor }};">{{ category.name|upper }}</span>
+                                    {% else %}
+                                        <span class="text-xs badge badge-color">{{ category.name|upper }}</span>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </footer>
+                    </article>
+                {% endfor %}
+            {% endif %}
+        </section>
+        <div class="mt-4">
+            {{ knp_pagination_render(articles) }}
+        </div>
+    </main>
+{% endblock %}

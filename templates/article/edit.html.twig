@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% set title = "Edit Article: " ~ article.title %}
+
+{% block title %}{{ "Edit Article: " ~ article.title }}{% endblock %}
+
+{% block body %}
+    <main class="mx-auto mt-16 w-full max-w-screen-lg grow p-4">
+        <div class="flex flex-col-reverse sm:flex-row justify-between items-center">
+            <h1 class="my-12 text-center text-5xl font-medium text-slate-900 font-rajdhani inline-flex">Edit article #{{ article.id }}</h1>
+            <div class="self-center flex gap-2">
+                <a class="rounded bg-slate-50 px-4 py-2 font-medium transition hover:bg-slate-600 hover:text-white text-sm self-center" href="{{ path('app_article_index') }}">Back to Articles</a>
+
+                <div class="py-2 content-center flex">
+                    {{ include('article/_delete_form.html.twig') }}
+                </div>
+            </div>
+        </div>
+
+        {{ include('article/_form.html.twig') }}
+    </main>
+{% endblock %}
