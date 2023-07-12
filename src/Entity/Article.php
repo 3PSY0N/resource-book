@@ -15,6 +15,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Article
 {
     use TimestampableEntity;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -42,7 +43,7 @@ class Article
     #[Groups(['post:article'])]
     private ?string $content = null;
 
-    #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'articles', cascade: ['persist'])]
+    #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'articles', cascade: ['persist'], fetch: 'EAGER')]
     #[Groups(['post:article'])]
     private Collection $categories;
 
@@ -115,9 +116,6 @@ class Article
         return $this;
     }
 
-    /**
-     * @return Collection<int, Category>
-     */
     public function getCategories(): Collection
     {
         return $this->categories;
