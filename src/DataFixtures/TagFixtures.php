@@ -2,21 +2,21 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Category;
+use App\Entity\Tag;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class CategoryFixtures extends Fixture implements FixtureGroupInterface
+class TagFixtures extends Fixture implements FixtureGroupInterface
 {
     public static function getGroups(): array
     {
-        return ['category'];
+        return ['tags'];
     }
 
     public function load(ObjectManager $manager): void
     {
-        $categories = [
+        $tags = [
             'Apache',
             'Bash',
             'Batch',
@@ -36,12 +36,12 @@ class CategoryFixtures extends Fixture implements FixtureGroupInterface
             'Alpine'
         ];
 
-        foreach ($categories as $cat) {
-            $category = new Category();
+        foreach ($tags as $tag) {
+            $tagEntity = new Tag();
 
-            $category->setName($cat);
+            $tagEntity->setName($tag);
 
-            $manager->persist($category);
+            $manager->persist($tagEntity);
         }
 
         $manager->flush();
