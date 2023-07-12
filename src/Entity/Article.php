@@ -43,13 +43,13 @@ class Article
     #[Groups(['post:article'])]
     private ?string $content = null;
 
-    #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'articles', cascade: ['persist'], fetch: 'EAGER')]
+    #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'articles', cascade: ['persist'], fetch: 'EAGER')]
     #[Groups(['post:article'])]
-    private Collection $categories;
+    private Collection $tags;
 
     public function __construct()
     {
-        $this->categories = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -116,23 +116,23 @@ class Article
         return $this;
     }
 
-    public function getCategories(): Collection
+    public function getTags(): Collection
     {
-        return $this->categories;
+        return $this->tags;
     }
 
-    public function addCategory(Category $category): self
+    public function addTag(Tag $tag): self
     {
-        if (!$this->categories->contains($category)) {
-            $this->categories[] = $category;
+        if (!$this->tags->contains($tag)) {
+            $this->tags[] = $tag;
         }
 
         return $this;
     }
 
-    public function removeCategory(Category $category): self
+    public function removeTag(Tag $tag): self
     {
-        $this->categories->removeElement($category);
+        $this->tags->removeElement($tag);
 
         return $this;
     }
