@@ -45,6 +45,9 @@ migdiff: ## Generate a migration by comparing your current database to your mapp
 migexec: ## Execute a single migration version up or down manually.
 	$(SF_CONSOLE) doctrine:migrations:execute
 
+migmig: ## Execute a migration to a specified version or the latest available version.
+	$(SF_CONSOLE) doctrine:migrations:migrate
+
 dsu: ## Update database schema to match current mapping metadata.
 	$(SF_CONSOLE) doctrine:schema:update --force
 
