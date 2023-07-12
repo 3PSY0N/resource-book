@@ -13,6 +13,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Article|null findOneBy(array $criteria, array $orderBy = null)
  * @method Article[]    findAll()
  * @method Article[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Article|null findOneBySlug($slug)
  */
 class ArticleRepository extends ServiceEntityRepository
 {
@@ -52,29 +53,6 @@ class ArticleRepository extends ServiceEntityRepository
             ->setParameter('search', '%' . $filter . '%')
             ->getQuery()
             ->getResult();
-    }
-
-    public function addCategoriesToProduct(Article $article, array $categories): void
-    {
-        foreach ($categories as $category) {
-            // Vérifie si la catégorie n'a pas déjà été ajoutée au produit
-            if (!$article->getCategories()->contains($category)) {
-                // Ajoute la catégorie au produit
-                $article->addCategory($category);
-            }
-        }
-
-        // Enregistre les modifications dans la base de données
-        $this->getEntityManager()->flush();
-    }
-
-    public function removeCategoriesFromArticle(Article $article): void
-    {
-        // Supprime toutes les catégories associées à l'article
-        $article->getCategories()->clear();
-
-        // Enregistre les modifications dans la base de données
-        $this->getEntityManager()->flush();
     }
 
 //    /**
