@@ -14,11 +14,7 @@ class ArticleController extends AbstractController
     public const MAX_PER_PAGE = 10;
 
     #[Route('/', name: 'app_article_index')]
-    public function index(
-        Request $request,
-        ArticleRepository $articleRepository,
-        PaginatorInterface $paginator
-    ): Response
+    public function index(Request $request, ArticleRepository $articleRepository, PaginatorInterface $paginator): Response
     {
         $articles = $articleRepository->findBy([], ['createdAt' => 'DESC']);
 
@@ -52,6 +48,16 @@ class ArticleController extends AbstractController
 
         return $this->render('public/article/index.html.twig', [
             'articles' => $pagination
+        ]);
+    }
+
+    #[Route('/article/{slug}', name: 'app_article_show', methods: ['GET'])]
+    public function show($slug, ArticleRepository $articleRepository): Response
+    {
+        $article = $articleRepository->findOneBySlug($slug);
+
+        return $this->render('public/article/show.html.twig', [
+            'article' => $article
         ]);
     }
 }
