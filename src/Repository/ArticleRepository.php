@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -40,43 +41,33 @@ class ArticleRepository extends ServiceEntityRepository
         }
     }
 
-    public function search(string $filter): array
+    public function search(string $filter, string $orderBy = 'ASC'): Query
     {
-
-        if ($filter === '*') {
-            return $this->findAll();
-        }
-
-        return $this->createQueryBuilder('u')
-            ->where('u.title LIKE :search')
-            ->orWhere('u.content LIKE :search')
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.createdAt', $orderBy)
+            ->where('a.title LIKE :search')
+            ->orWhere('a.content LIKE :search')
+            ->orWhere('a.headingContent LIKE :search')
             ->setParameter('search', '%' . $filter . '%')
-            ->getQuery()
-            ->getResult();
+            ->getQuery();
     }
 
-//    /**
-//     * @return Article[] Returns an array of Article objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function getArticlesWithTags(string $orderBy = 'ASC'): Query
+    {
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.createdAt', $orderBy)
+            ->leftJoin('a.tags', 't')
+            ->addSelect('t')
+            ->getQuery();
+    }
 
-//    public function findOneBySomeField($value): ?Article
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function getArticlesByTag(string $slug, string $orderBy = 'ASC'): Query
+    {
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.createdAt', $orderBy)
+            ->leftJoin('a.tags', 't')
+            ->where('t.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->getQuery();
+    }
 }
