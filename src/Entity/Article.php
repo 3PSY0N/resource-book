@@ -43,7 +43,7 @@ class Article
     #[Groups(['post:article'])]
     private ?string $content = null;
 
-    #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'articles', cascade: ['persist'], fetch: 'EAGER')]
+    #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'articles', cascade: ['persist'])]
     #[Groups(['post:article'])]
     private Collection $tags;
 
