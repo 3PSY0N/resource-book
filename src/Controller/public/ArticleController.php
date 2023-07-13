@@ -11,15 +11,17 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ArticleController extends AbstractController
 {
-    public const MAX_PER_PAGE = 10;
+    private const MAX_PER_PAGE = 10;
 
-    #[Route('/', name: 'app_article_index')]
-    public function index(Request $request, ArticleRepository $articleRepository, PaginatorInterface $paginator): Response
+    #[Route('/', name: 'public_article_index', methods: ['GET'])]
+    public function index(
+        Request            $request,
+        ArticleRepository  $articleRepository,
+        PaginatorInterface $paginator
+    ): Response
     {
-        $articles = $articleRepository->findBy([], ['createdAt' => 'DESC']);
-
         $paginatedArticles = $paginator->paginate(
-            $articles,
+            $articleRepository->getArticlesWithTags('DESC'),
             $request->query->getInt('page', 1),
             self::MAX_PER_PAGE
         );
@@ -29,19 +31,21 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/search', name: 'app_article_search')]
-    public function search(Request $request, ArticleRepository $articleRepository, PaginatorInterface $paginator): Response
+    #[Route('/article/search', name: 'public_article_search', methods: ['GET'])]
+    public function search(
+        Request            $request,
+        ArticleRepository  $articleRepository,
+        PaginatorInterface $paginator
+    ): Response
     {
         $filter = $request->get('q');
 
         if (empty($filter)) {
-            return $this->redirectToRoute('app_article_index');
+            return $this->redirectToRoute('public_article_index');
         }
 
-        $articlesSearch = $articleRepository->search($filter);
-
         $pagination = $paginator->paginate(
-            $articlesSearch,
+            $articleRepository->search($filter, 'DESC'),
             $request->query->getInt('page', 1),
             self::MAX_PER_PAGE
         );
@@ -51,13 +55,11 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/article/{slug}', name: 'app_article_show', methods: ['GET'])]
+    #[Route('/article/{slug}', name: 'public_article_show', methods: ['GET'])]
     public function show($slug, ArticleRepository $articleRepository): Response
     {
-        $article = $articleRepository->findOneBySlug($slug);
-
         return $this->render('public/article/show.html.twig', [
-            'article' => $article
+            'article' => $articleRepository->findOneBySlug($slug)
         ]);
     }
 }
