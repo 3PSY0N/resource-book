@@ -20,6 +20,7 @@ html {
     input {
         color: #505050 !important;
     }
+
     button {
         @apply shadow-none !-mt-px after:!rounded-full !cursor-pointer !bg-none;
     }
@@ -232,6 +233,20 @@ html {
     input[type=checkbox] {
         @apply rounded border-indigo-200 text-indigo-500;
     }
+
+    footer {
+        p {
+            @apply mb-0;
+        }
+    }
+}
+
+.dark .bg-squares {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(241 245 249 / 0.03)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
+}
+
+.bg-squares {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(15 23 42 / 0.04)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
 }
 
 .badge-color {
