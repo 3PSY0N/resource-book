@@ -1,0 +1,28 @@
+{% for article in articles %}
+    <article class="relative rounded-lg border border-slate-200 bg-slate-200 p-4 shadow transition duration-300 group hover:bg-slate-100 hover:shadow-lg dark:shadow-slate-950 dark:border-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700">
+        <header>
+            <h2 class="text-lg text-slate-500 transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300">
+                <a class="relative block before:content-[''] before:block before:absolute before:w-1/4 before:h-0.5 before:bottom-0 before:left-0 before:bg-slate-400 dark:before:bg-slate-500 before:scale-x-0 before:origin-top-left before:transition-all before:duration-[400ms] before:ease-in-out group-hover:before:scale-x-100"
+                   href="{{ path('public_article_show', { slug: article.slug }) }}"
+                >
+                    {{ article.title }}
+                </a>
+            </h2>
+        </header>
+        {% if article.headingContent %}
+            <p class="mt-4 text-sm font-light text-slate-500 dark:text-slate-400">
+                {{ article.headingContent|striptags|length > 250 ? article.headingContent|slice(0, 250) ~ '...' : article.headingContent|striptags }}
+            </p>
+        {% endif %}
+        <footer class="mt-4 flex flex-col text-xs md:flex-row">
+            <div class="grow flex-wrap gap-1.5">
+                {% for tag in article.tags %}
+                    {% include('_global/_tags.html.twig') with {'tag': tag} %}
+                {% endfor %}
+            </div>
+            <div class="mt-4 flex cursor-help items-center justify-end text-slate-400 dark:text-slate-500 md:mt-0">
+                <span>Published: <time title="{{ article.createdAt|date("c", "Europe/Paris") }}" datetime="{{ article.createdAt|date("c", "Europe/Paris") }}">{{ article.createdAt|date("Y/m/d - H:i", "Europe/Paris") }}</time></span>
+            </div>
+        </footer>
+    </article>
+{% endfor %}
