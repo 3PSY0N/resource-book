@@ -38,20 +38,21 @@ class ArticleController extends AbstractController
         PaginatorInterface $paginator
     ): Response
     {
-        $filter = $request->get('q');
+        $query = $request->get('q');
 
-        if (empty($filter)) {
+        if (empty($query)) {
             return $this->redirectToRoute('public_article_index');
         }
 
         $pagination = $paginator->paginate(
-            $articleRepository->search($filter, 'DESC'),
+            $articleRepository->search($query, 'DESC'),
             $request->query->getInt('page', 1),
             self::MAX_PER_PAGE
         );
 
         return $this->render('public/article/index.html.twig', [
-            'articles' => $pagination
+            'articles' => $pagination,
+            'query'    => $query
         ]);
     }
 
