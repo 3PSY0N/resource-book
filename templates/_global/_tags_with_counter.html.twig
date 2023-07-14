@@ -1,0 +1,21 @@
+{% if tag.bgcolor or tag.fgcolor %}
+    <a href="{{ path('public_tag_article_index', { 'slug': tag.slug }) }}"
+       class="inline-flex items-center rounded-full py-1 pr-1 pl-3 text-center text-base font-semibold transition font-rajdhani bg-[--badge-bg] text-[--badge-fg] hover:ring-[--badge-bg] hover:ring"
+       style="--badge-bg: {{ tag.bgcolor }}; --badge-fg: {{ tag.fgcolor }};"
+    >
+        {{ tag.name|upper }}
+        <span class="ml-2 inline-flex h-4 items-center justify-center rounded-full bg-slate-100 p-2 py-3 text-base text-slate-900 min-w-[1rem] font-semibolds">
+            {{ tag.articles|length }}
+        </span>
+    </a>
+{% else %}
+    <a href="{{ path('public_tag_article_index', { 'slug': tag.slug }) }}"
+       class="inline-flex items-center rounded-full bg-slate-500 py-1 pr-1 pl-3 text-center text-base font-semibold text-slate-100 transition font-rajdhani hover:ring hover:ring-slate-500"
+       style="--badge-bg: {{ tag.bgcolor }}; --badge-fg: {{ tag.fgcolor }};"
+    >
+        {{ tag.name|upper }}
+        <span class="ml-2 inline-flex h-4 items-center justify-center rounded-full bg-slate-100 p-2 py-3 text-base text-slate-900 min-w-[1.5rem] font-semibolds">
+            {{ tag.articles|length }}
+        </span>
+    </a>
+{% endif %}
