@@ -7,7 +7,6 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block pageTitle %}RessourceBook - {% block title %}{% endblock %}{% endblock %}</title>
-
     <link rel="icon" href="{{ asset('assets/img/favicon.svg') }}" type="image/svg+xml">
 
     {% block stylesheets %}
@@ -26,7 +25,8 @@
         }
     </script>
 </head>
-<body class="flex flex-col min-h-[100dvh] bg-slate-300 max-w-screen-qhd">
+<body class="relative flex flex-col min-h-[100dvh] bg-slate-300 dark:bg-slate-900 transition-colors max-w-screen-qhd">
+<div aria-hidden="true" class="bg-squares -z-1 absolute inset-x-0 h-[50rem] [mask-image:linear-gradient(0deg,transparent,black)]"></div>
 {% include 'public/_partials/navbar.html.twig' %}
 
 {% block body %}{% endblock %}
