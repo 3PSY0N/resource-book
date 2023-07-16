@@ -110,7 +110,7 @@ class CommonMarkExtensionRuntime implements RuntimeExtensionInterface
                 'ref_class'          => 'fn-ref',
                 'ref_id_prefix'      => 'ref:',
                 'footnote_class'     => 'footnote',
-                'footnote_id_prefix' => 'ref:',
+                'footnote_id_prefix' => 'go-ref:',
             ],
             'heading_permalink' => [
                 'html_class' => 'permalink',
