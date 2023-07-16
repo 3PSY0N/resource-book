@@ -1,0 +1,41 @@
+{% extends 'public/base.html.twig' %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block body %}
+    <main class="mx-auto mt-16 w-full max-w-screen-lg grow p-4 lg:mt-32">
+        <article>
+            <header class="flex justify-center rounded-lg border border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800">
+                <h1 class="my-8 text-4xl text-slate-900 dark:text-slate-300 font-rajdhani font-medium">{{ article.title }}</h1>
+            </header>
+
+            <section id="article-content" class="relative mt-8 rounded-lg border border-slate-200 bg-slate-50 p-4 shadow-md dark:border-slate-700 dark:bg-slate-800">
+                <section class="italic">
+                    {{ article.headingContent|markdownify }}
+                </section>
+
+                <section>
+                    {{ article.content|markdownify }}
+                </section>
+            </section>
+
+            <footer class="mt-4 rounded-lg border border-slate-200 bg-slate-50 p-4 shadow-md dark:border-slate-700 dark:bg-slate-800">
+                <div class="mt-4 flex flex-col text-xs">
+                    <div class="flex grow flex-wrap gap-1.5">
+                        {% for tag in article.tags %}
+                            {% include('_global/_tags.html.twig') with {'tag': tag} %}
+                        {% endfor %}
+                    </div>
+
+                    <div class="mt-4 flex flex-col items-start text-slate-400 md:items-end">
+                        <p>Published by: <span class="cursor-help text-slate-500 dark:text-slate-300">UserName</span> on <time class="cursor-help" title="{{ article.createdAt|date("c", "Europe/Paris") ~ 'GMT' }}" datetime="{{ article.createdAt|date("c", "Europe/Paris") }}">{{ article.createdAt|date("m/d/Y H:i", "Europe/Paris") }}</time></p>
+                        {% if article.updatedAt != article.createdAt %}
+                            <p>Last edit: <time class="cursor-help" title="{{ article.updatedAt|date("c", "Europe/Paris") ~ 'GMT' }}" datetime="{{ article.updatedAt|date("c", "Europe/Paris") }}">{{ article.updatedAt|date("m/d/Y H:i", "Europe/Paris") }}</time></p>
+                        {% endif %}
+                    </div>
+                </div>
+            </footer>
+        </article>
+    </main>
+{% endblock %}
+
