@@ -28,7 +28,7 @@
                     </div>
 
                     <div class="mt-4 flex flex-col items-start text-slate-400 md:items-end">
-                        <p>Published by: <span class="cursor-help text-slate-500 dark:text-slate-300">UserName</span> on <time class="cursor-help" title="{{ article.createdAt|date("c", "Europe/Paris") ~ 'GMT' }}" datetime="{{ article.createdAt|date("c", "Europe/Paris") }}">{{ article.createdAt|date("m/d/Y H:i", "Europe/Paris") }}</time></p>
+                        <p>Published by: <span class="text-slate-500 dark:text-slate-300">UserName</span> on <time class="cursor-help" title="{{ article.createdAt|date("c", "Europe/Paris") ~ 'GMT' }}" datetime="{{ article.createdAt|date("c", "Europe/Paris") }}">{{ article.createdAt|date("m/d/Y H:i", "Europe/Paris") }}</time></p>
                         {% if article.updatedAt != article.createdAt %}
                             <p>Last edit: <time class="cursor-help" title="{{ article.updatedAt|date("c", "Europe/Paris") ~ 'GMT' }}" datetime="{{ article.updatedAt|date("c", "Europe/Paris") }}">{{ article.updatedAt|date("m/d/Y H:i", "Europe/Paris") }}</time></p>
                         {% endif %}
