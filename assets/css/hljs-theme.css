@@ -1,82 +1,181 @@
-/*
-Atom One Light by Daniel Gamage
-Original One Light Syntax theme from https://github.com/atom/one-light-syntax
-
-base:    #fafafa
-mono-1:  #383a42
-mono-2:  #686b77
-mono-3:  #a0a1a7
-hue-1:   #0184bb
-hue-2:   #4078f2
-hue-3:   #a626a4
-hue-4:   #50a14f
-hue-5:   #e45649
-hue-5-2: #c91243
-hue-6:   #986801
-hue-6-2: #c18401
-*/
-
 .hljs {
-  @apply block overflow-x-auto p-4 dark:bg-slate-950/90;
+  display: block;
+  overflow-x: auto;
+  padding: 1rem;
+  background: rgb(255 255 255 / 0.3);
+  color: #585656;
 }
 
-.hljs-keyword, .hljs-operator, .hljs-pattern-match {
-  @apply text-[#ff0055] dark:text-[#f43d7a];
+.hljs::selection,
+.hljs ::selection {
+  background-color: #d6d6d6;
+  color: #4d4d4c;
 }
-.hljs-pattern-match .hljs-constructor {
-  color: #61aeee;
-}
-.hljs-function {
-  color: #61aeee;
-}
-.hljs-function .hljs-params {
-  @apply text-[#9236e2] dark:text-[#ce9bfb];
-}
-.hljs-function .hljs-params .hljs-typing {
-  color: #FD971F;
-}
-.hljs-module-access .hljs-module {
-  color: #7e57c2;
-}
-.hljs-constructor {
-  color: #e2b93d;
-}
-.hljs-constructor .hljs-string {
-  color: #9CCC65;
 
+.hljs-comment,
+.hljs-quote {
+  color: #9daec8;
+  font-style: italic;
 }
-.hljs-comment, .hljs-quote {
-  @apply italic text-[#ababab] dark:text-[#5c6370];
+
+.hljs-doctag,
+.hljs-keyword,
+.hljs-formula {
+  color: #ce76e9;
 }
-.hljs-doctag, .hljs-formula {
-  color: #c678dd;
+
+.hljs-section,
+.hljs-name,
+.hljs-selector-tag,
+.hljs-deletion,
+.hljs-subst {
+  color: #e95762;
 }
-.hljs-section, .hljs-name, .hljs-selector-tag, .hljs-deletion, .hljs-subst {
-  color: #e06c75;
-}
+
 .hljs-literal {
-  @apply text-[#8053dd] dark:text-[#a380ed];
+  color: #17a8ba;
 }
-.hljs-string, .hljs-regexp, .hljs-addition, .hljs-attribute, .hljs-meta .hljs-string {
-  @apply text-[#00870c] dark:text-[#9bc88e];
+
+.hljs-string,
+.hljs-regexp,
+.hljs-addition,
+.hljs-attribute,
+.hljs-meta .hljs-string {
+  color: #3f8b0c;
 }
+
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-type,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo {
+  color: #c77c36;
+}
+
+.hljs-number {
+  color: #ff8700;
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link,
+.hljs-meta,
+.hljs-selector-id,
+.hljs-title {
+  color: #2e92e6;
+}
+
 .hljs-built_in,
 .hljs-title.class_,
 .hljs-class .hljs-title {
-  @apply text-[#1b9902] dark:text-[#e6c07b];
+  color: #846ae9;
 }
-.hljs-attr, .hljs-variable, .hljs-template-variable, .hljs-type, .hljs-selector-class, .hljs-selector-attr, .hljs-selector-pseudo, .hljs-number {
-  @apply text-[#dc6f0a] dark:text-[#d19a66];
-}
-.hljs-symbol, .hljs-bullet, .hljs-link, .hljs-meta, .hljs-selector-id, .hljs-title {
-  @apply text-[#0089ff]
-}
+
 .hljs-emphasis {
   font-style: italic;
 }
+
 .hljs-strong {
   font-weight: bold;
 }
+
 .hljs-link {
   text-decoration: underline;
+}
+
+/*
+Dark Theme:
+Atom One Dark by Daniel Gamage
+Original One Dark Syntax theme from https://github.com/atom/one-dark-syntax
+*/
+
+html.dark {
+  .hljs {
+    display: block;
+    overflow-x: auto;
+    padding: 1rem;
+    background-color: rgb(2 6 23 / 0.9);
+    color: #b2b2b2;
+  }
+
+  .hljs::selection,
+  .hljs ::selection {
+    background-color: rgb(147 197 253);
+    color: rgb(2 6 23);
+  }
+
+  .hljs-comment,
+  .hljs-quote {
+    color: #5c6370;
+    font-style: italic;
+  }
+
+  .hljs-doctag,
+  .hljs-keyword,
+  .hljs-formula {
+    color: #c678dd;
+  }
+
+  .hljs-section,
+  .hljs-name,
+  .hljs-selector-tag,
+  .hljs-deletion,
+  .hljs-subst {
+    color: #e06c75;
+  }
+
+  .hljs-literal {
+    color: #5edded;
+  }
+
+  .hljs-string,
+  .hljs-regexp,
+  .hljs-addition,
+  .hljs-attribute,
+  .hljs-meta .hljs-string {
+    color: #98c379;
+  }
+
+  .hljs-attr,
+  .hljs-variable,
+  .hljs-template-variable,
+  .hljs-type,
+  .hljs-selector-class,
+  .hljs-selector-attr,
+  .hljs-selector-pseudo  {
+    color: #d19a66;
+  }
+
+  .hljs-number {
+    color: #ff8700;
+  }
+
+  .hljs-symbol,
+  .hljs-bullet,
+  .hljs-link,
+  .hljs-meta,
+  .hljs-selector-id,
+  .hljs-title {
+    color: #61aeee;
+  }
+
+  .hljs-built_in,
+  .hljs-title.class_,
+  .hljs-class .hljs-title {
+    color: #e6c07b;
+  }
+
+  .hljs-emphasis {
+    font-style: italic;
+  }
+
+  .hljs-strong {
+    font-weight: bold;
+  }
+
+  .hljs-link {
+    text-decoration: underline;
+  }
 }
