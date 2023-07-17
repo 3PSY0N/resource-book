@@ -1,7 +1,59 @@
-import hljs from 'highlight.js';
+import '../css/hljs-theme.css';
+
+import hljs from 'highlight.js/lib/core';
+
+import apache from 'highlight.js/lib/languages/apache';
+import bash from 'highlight.js/lib/languages/bash';
+import css from 'highlight.js/lib/languages/css';
+import diff from 'highlight.js/lib/languages/diff';
+import dockerfile from 'highlight.js/lib/languages/dockerfile';
+import fix from 'highlight.js/lib/languages/fix';
+import gcode from 'highlight.js/lib/languages/gcode';
+import graphql from 'highlight.js/lib/languages/graphql';
+import http from 'highlight.js/lib/languages/http';
+import ini from 'highlight.js/lib/languages/ini';
+import javascript from 'highlight.js/lib/languages/javascript';
+import json from 'highlight.js/lib/languages/json';
+import makefile from 'highlight.js/lib/languages/makefile';
+import markdown from 'highlight.js/lib/languages/markdown';
+import nginx from 'highlight.js/lib/languages/nginx';
+import php from 'highlight.js/lib/languages/php';
+import phpTemplate from 'highlight.js/lib/languages/php-template';
+import plaintext from 'highlight.js/lib/languages/plaintext';
+import powershell from 'highlight.js/lib/languages/powershell';
+import scss from 'highlight.js/lib/languages/scss';
+import shell from 'highlight.js/lib/languages/shell';
+import sql from 'highlight.js/lib/languages/sql';
+import twig from 'highlight.js/lib/languages/twig';
+import typescript from 'highlight.js/lib/languages/typescript';
+import xml from 'highlight.js/lib/languages/xml';
+import yaml from 'highlight.js/lib/languages/yaml';
+
+hljs.registerLanguage('apache', apache);
+hljs.registerLanguage('bash', bash);
+hljs.registerLanguage('css', css);
+hljs.registerLanguage('diff', diff);
+hljs.registerLanguage('dockerfile', dockerfile);
+hljs.registerLanguage('fix', fix);
+hljs.registerLanguage('gcode', gcode);
+hljs.registerLanguage('graphql', graphql);
+hljs.registerLanguage('http', http);
+hljs.registerLanguage('ini', ini);
+hljs.registerLanguage('javascript', javascript);
+hljs.registerLanguage('json', json);
+hljs.registerLanguage('makefile', makefile);
+hljs.registerLanguage('markdown', markdown);
+hljs.registerLanguage('nginx', nginx);
+hljs.registerLanguage('php', php);
+hljs.registerLanguage('php-template', phpTemplate);
+hljs.registerLanguage('plaintext', plaintext);
+hljs.registerLanguage('powershell', powershell);
+hljs.registerLanguage('scss', scss);
+hljs.registerLanguage('shell', shell);
+hljs.registerLanguage('sql', sql);
+hljs.registerLanguage('twig', twig);
+hljs.registerLanguage('typescript', typescript);
+hljs.registerLanguage('xml', xml);
+hljs.registerLanguage('yaml', yaml);
 
 hljs.highlightAll();
-
-// import hljs from 'highlight.js/lib/core';
-// import javascript from 'highlight.js/lib/languages/javascript';
-// hljs.registerLanguage('javascript', javascript);
