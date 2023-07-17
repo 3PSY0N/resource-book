@@ -7,7 +7,11 @@ export default defineConfig({
     build: {
         rollupOptions: {
             input: {
-                app: "./assets/js/app.js"
+                app: "./assets/js/app.js",
+                choices: "./assets/js/choices.js",
+                hljs: "./assets/js/HLJS.js",
+                coloris: "./assets/js/coloris.js",
+                easymde: "./assets/js/easyMDE.js",
             },
             output: {
                 assetFileNames: (assetInfo) => {
