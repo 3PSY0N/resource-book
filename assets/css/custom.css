@@ -16,11 +16,9 @@ html {
     scroll-padding-top: 9rem;
 }
 
-
 [x-cloak] {
     @apply !hidden;
 }
-
 
 .clr-field {
     input {
@@ -173,23 +171,18 @@ html {
         @apply bg-yellow-300 px-1;
     }
 
+    ol, ul {
+        code {
+            @apply bg-gradient-to-r from-blue-400/30 to-indigo-400/30 p-0.5 dark:from-blue-500/30 dark:to-indigo-500/30;
+        }
+    }
+
     p {
         @apply mb-4 last:mb-0;
 
         code {
             @apply bg-gradient-to-r from-blue-400/30 to-indigo-400/30 p-0.5 dark:from-blue-500/30 dark:to-indigo-500/30;
         }
-
-/*        a {
-            @apply relative z-1 p-0.5
-            before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-full before:h-[3px] before:-z-1
-            before:transition-all before:bg-gradient-to-r before:from-blue-400/30 before:to-indigo-400/30
-            hover:before:bottom-0 hover:before:h-full after:text-indigo-300;
-        }*/
-
-/*        a.fn-ref {
-            @apply before:hidden text-sm;
-        }*/
     }
 
     input[type=checkbox] {

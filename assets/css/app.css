@@ -2,14 +2,4 @@
 @import "tailwindcss/base.css";
 @import "tailwindcss/components.css";
 @import "tailwindcss/utilities.css";
-
-@import "@melloware/coloris/dist/coloris.css";
-@import "easymde/dist/easymde.min.css";
-
 @import "custom.css";
-@import "choices.css";
-@import "hljs-theme.css";
-
-
-
-
