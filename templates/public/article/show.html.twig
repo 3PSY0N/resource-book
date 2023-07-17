@@ -1,5 +1,15 @@
 {% extends 'public/base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {{ vite_entry_link_tags('hljs') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ vite_entry_script_tags('hljs') }}
+{% endblock %}
+
 {% block title %}{{ article.title }}{% endblock %}
 
 {% block body %}
@@ -20,7 +30,7 @@
             </section>
 
             <footer class="mt-4 rounded-lg border border-slate-200 bg-slate-50 p-4 shadow-md dark:border-slate-700 dark:bg-slate-800">
-                <div class="mt-4 flex flex-col text-xs">
+                <div class="flex flex-col text-xs">
                     <div class="flex grow flex-wrap gap-1.5">
                         {% for tag in article.tags %}
                             {% include('_global/_tags.html.twig') with {'tag': tag} %}
