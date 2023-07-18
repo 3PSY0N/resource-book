@@ -1,6 +1,7 @@
+import '../css/choices.css';
 import Choices from "choices.js";
 
-const element = document.querySelector('.selectcategory');
+const element = document.querySelector('.select-tags');
 const choices = new Choices(element, {
     silent: true,
     renderChoiceLimit: -1,

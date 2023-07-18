@@ -451,7 +451,8 @@ span.CodeMirror-selectedtext {
 }
 
 .EasyMDEContainer {
-    display: block
+    display: block;
+    margin-top: 1rem;
 }
 
 .CodeMirror-rtl pre {

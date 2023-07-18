@@ -15,7 +15,7 @@
 .choices[data-type*=text] .choices__button {
     margin-right: -4px;
     padding-left: 16px;
-    @apply hover:bg-red-400 rounded-full transition;
+    @apply rounded-full transition hover:bg-red-400;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24'%3E%3Cpath fill='currentColor' d='M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z'/%3E%3C/svg%3E");
     background-size: 12px;
 }
@@ -25,33 +25,27 @@
     vertical-align: top;
     width: 100%;
     background-color: transparent;
-    /*padding: 7.5px 7.5px 3.75px;*/
-
     font-size: 14px;
     min-height: 44px;
     overflow: hidden;
-    @apply flex flex-col py-2;
+    @apply flex flex-col-reverse;
 }
 
 .choices__list--multiple .choices__item {
-    @apply border border-indigo-400/50 bg-indigo-200 inline-flex items-center gap-x-0.5 rounded-md px-2 py-1 text-xs font-medium text-indigo-700;
+    @apply inline-flex items-center rounded-md border border-indigo-400/50 bg-indigo-200 px-2 py-1 text-xs font-medium text-indigo-700 gap-x-0.5;
 }
 
 .choices__list--dropdown, .choices__list[aria-expanded] {
-
-    @apply invisible z-1 absolute bg-slate-50 w-full md:w-1/3 my-0 ml-1 mx-auto shadow-md shadow-indigo-300 border overflow-hidden;
-/*    transform: translate(-50%);
-    left: 50%;
-    right: 50%;*/
+    @apply invisible z-1 !top-16 absolute bg-slate-50 !w-full md:w-1/3 my-0 mx-auto shadow-md border border-slate-400 dark:border-slate-600 overflow-hidden;
     top: 100%;
     word-break: break-all;
     will-change: visibility;
 }
+
 .is-active.choices__list--dropdown, .is-active.choices__list[aria-expanded] {
     visibility: visible;
     @apply rounded;
 }
-
 
 .choices__list--dropdown .choices__list, .choices__list[aria-expanded] .choices__list {
     position: relative;
@@ -63,7 +57,7 @@
 }
 
 .choices__list--dropdown .choices__item--selectable.is-highlighted, .choices__list[aria-expanded] .choices__item--selectable.is-highlighted {
-    @apply bg-indigo-100;
+    @apply bg-indigo-200 dark:bg-indigo-200 dark:text-slate-900;
 }
 
 .choices__item--selectable {
@@ -80,27 +74,26 @@
     background-position: center;
     cursor: pointer;
 }
+
 .choices__button:focus {
     outline: none;
 }
 
 .choices__input {
-    vertical-align: baseline;
-    font-size: 14px;
-    margin-bottom: 5px;
-    border: 0;
-    border-radius: 0;
-    max-width: 100%;
-    padding: 4px 0 4px 2px;
-    @apply !w-full md:!w-1/3 mt-4 rounded-md border border-gray-300 px-2 py-2 shadow focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50;
+    @apply my-4 w-full rounded border border-slate-300 bg-slate-100 text-slate-900 shadow p-2.5 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100;
+}
+
+.choices__input.choices__input--cloned {
+    width: 100% !important;
 }
 
 .choices__list--dropdown .choices__item, .choices__list[aria-expanded] .choices__item {
     position: relative;
     padding: 10px;
     font-size: 14px;
+    @apply bg-slate-100 dark:bg-slate-900 dark:text-slate-100;
 }
 
 .choices__list.choices__list--multiple {
-    @apply flex flex-wrap gap-y-1.5 gap-x-2;
+    @apply flex flex-wrap gap-x-2 overflow-auto max-h-[100px] gap-y-1.5;
 }
