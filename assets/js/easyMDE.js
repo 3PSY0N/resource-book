@@ -1,18 +1,36 @@
+import '../css/easymde.css';
 import EasyMDE from "easymde";
+
+const marker = {
+    name: 'marker',
+    title: "Marker text",
+    action: (editor) => {
+        const cm = editor.codemirror;
+        const selectedText = cm.getSelection();
+        cm.replaceSelection('==' + selectedText + '==');
+    },
+    className: "fa fa-window-minimize"
+};
+
+const toolbar = [
+    'bold', 'italic', 'strikethrough', '|',
+    'heading', 'heading-smaller', 'heading-bigger', 'heading-1', 'heading-2', 'heading-3', 'code', '|',
+    marker ,'quote', 'unordered-list', 'ordered-list', '|',
+    'clean-block', 'link', 'image', 'table', 'horizontal-rule', '|',
+    'undo', 'redo', '|',
+    'side-by-side', 'fullscreen', 'preview'
+]
 
 const easyMDE = new EasyMDE({
     element: document.getElementById("article_content"),
-    // minHeight: "300px",
     maxHeight: "550px",
-    showIcons: ['strikethrough', 'code', 'table', 'redo', 'heading', 'undo', 'heading-bigger', 'heading-smaller', 'heading-1', 'heading-2', 'heading-3', 'clean-block', 'horizontal-rule'],
-    hideIcons: ['fullscreen', 'side-by-side'],
     autosave: {
         enabled: false,
-        delay: 1000,
-        uniqueId: 'article_content_saved'
     },
-    autoDownloadFontAwesome: true,
+    autoDownloadFontAwesome: false,
+    spellChecker: false,
     lineWrapping: true,
     lineNumbers: true,
-    placeholder: "Type here .."
+    placeholder: "Type here ..",
+    toolbar: toolbar,
 });
