@@ -14,13 +14,13 @@
                 {{ article.headingContent|striptags|length > 250 ? article.headingContent|slice(0, 250) ~ '...' : article.headingContent|striptags }}
             </p>
         {% endif %}
-        <footer class="mt-4 flex flex-col text-xs md:flex-row">
-            <div class="grow flex-wrap gap-1.5">
+        <footer class="mt-4 flex flex-col text-xs md:flex-row flex-wrap justify-end">
+            <div class="flex grow flex-wrap gap-1.5">
                 {% for tag in article.tags %}
                     {% include('_global/_tags.html.twig') with {'tag': tag} %}
                 {% endfor %}
             </div>
-            <div class="mt-4 flex cursor-help items-center justify-end text-slate-400 dark:text-slate-500 md:mt-0">
+            <div class="mt-2 flex cursor-help items-center justify-end text-slate-400 dark:text-slate-500">
                 <span>Published: <time title="{{ article.createdAt|date("c", "Europe/Paris") }}" datetime="{{ article.createdAt|date("c", "Europe/Paris") }}">{{ article.createdAt|date("Y/m/d - H:i", "Europe/Paris") }}</time></span>
             </div>
         </footer>
