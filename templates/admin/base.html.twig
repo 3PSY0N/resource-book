@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"
+      x-data="{ darkMode: localStorage.getItem('dark') === 'true'}"
+      x-init="$watch('darkMode', val => localStorage.setItem('dark', val))"
+      :class="{ 'dark': darkMode }"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block pageTitle %}RessourceBook - {% block title %}{% endblock %}{% endblock %}</title>
+    <link rel="icon" href="{{ asset('assets/img/favicon.svg') }}" type="image/svg+xml">
+
+    {% block stylesheets %}
+        {{ vite_entry_link_tags('app') }}
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ vite_entry_script_tags('app') }}
+    {% endblock %}
+
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+</head>
+<body class="flex flex-col bg-slate-300 min-h-[100dvh] dark:bg-slate-900">
+    {% include 'admin/_partials/navbar.html.twig' %}
+
+    <div class="flex grow flex-col transition-colors lg:pl-72">
+        {% block body %}{% endblock %}
+        {% include 'admin/_partials/footer.html.twig' %}
+    </div>
+</body>
+</html>
+
+
