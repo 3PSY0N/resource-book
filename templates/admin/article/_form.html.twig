@@ -1,0 +1,36 @@
+{{ form_start(form) }}
+<div class="flex flex-wrap items-center justify-center gap-8 lg:flex-nowrap">
+    <div class="flex w-full flex-col self-start">
+        {{ form_label(form.title, 'Title*', { 'label_attr': { 'class': 'text-slate-900 dark:text-slate-100' }})}}
+        {{ form_widget(form.title, {'attr': {
+            'class': 'mt-4 w-full rounded border text-slate-900 dark:text-slate-100 border-slate-300 bg-slate-100 shadow p-2.5 dark:border-slate-600 dark:bg-slate-700',
+        }}) }}
+        {{ form_errors(form.title) }}
+    </div>
+
+    <div class="w-full self-start">
+        {{ form_label(form.tags, [], { 'label_attr': { 'class': 'text-slate-900 dark:text-slate-100' }})}}
+        {{ form_widget(form.tags, { 'attr': { 'class': 'select-tags mt-4' }}) }}
+    </div>
+</div>
+
+<div class="mt-8">
+    {{ form_label(form.headingContent, [], { 'label_attr': { 'class': 'text-slate-900 dark:text-slate-100' }})}}
+    {{ form_widget(form.headingContent, {'attr': {
+        'class': 'mt-4 w-full rounded border text-slate-900 dark:text-slate-100 border-slate-300 bg-slate-100 shadow p-2.5 dark:border-slate-600 dark:bg-slate-700',
+        'rows': '4',
+        'cols': '50'
+    }}) }}
+    {{ form_errors(form.headingContent) }}
+</div>
+
+<div class="mt-8">
+    {{ form_label(form.content, 'Content*', { 'label_attr': { 'class': 'text-slate-900 dark:text-slate-100' }})}}
+    {{ form_widget(form.content) }}
+    {{ form_errors(form.content) }}
+</div>
+
+<div class="mt-4 mb-16 flex justify-end gap-2">
+    <button class="rounded bg-slate-100 px-4 py-2 text-sm font-medium transition hover:bg-slate-600 hover:text-slate-100 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:hover:text-slate-100">{{ button_label|default('Save article') }}</button>
+</div>
+{{ form_end(form) }}

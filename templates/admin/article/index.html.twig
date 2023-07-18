@@ -1,0 +1,21 @@
+{% extends 'admin/base.html.twig' %}
+
+{% set title = "Articles" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    <main class="mx-auto w-full max-w-screen-2xl grow p-4">
+        <h1 class="mt-8 text-center text-5xl font-medium text-slate-900 font-rajdhani dark:text-slate-300">{{ title }}</h1>
+
+        <section class="mt-14">
+            <div class="columns-1 gap-10 xl:columns-2">
+            {% include '_global/_admin_article_list.html.twig' with { 'articles': articles } %}
+            </div>
+        </section>
+
+        <div class="mt-8">
+            {{ knp_pagination_render(articles, 'public/_partials/_pagination.html.twig') }}
+        </div>
+    </main>
+{% endblock %}

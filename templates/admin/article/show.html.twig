@@ -1,0 +1,70 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ vite_entry_link_tags('hljs') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ vite_entry_script_tags('hljs') }}
+{% endblock %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block body %}
+    <main class="mx-auto w-full max-w-screen-lg grow p-4">
+        <div class="flex justify-end gap-2">
+            <a class="self-center rounded bg-slate-100 px-4 py-2 text-sm font-medium transition hover:bg-slate-600 hover:text-slate-100 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:hover:text-slate-100" href="{{ path('admin_article_index') }}">Back to Articles</a>
+
+            <div class="flex content-center py-2">
+                <a title="Edit" class="rounded bg-slate-100 px-4 py-2 text-sm font-medium transition hover:bg-blue-400 dark:bg-slate-700 dark:hover:bg-blue-400" href="{{ path('admin_article_edit', {'uid': article.uid}) }}">
+                    <svg class="h-5 w-5 stroke-slate-900 transition-all dark:stroke-slate-100" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"/>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="flex content-center py-2">
+                {{ include('admin/article/_delete_form.html.twig') }}
+            </div>
+        </div>
+
+        <article>
+            <header class="flex justify-center rounded-lg border border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800">
+                <h1 class="my-8 text-4xl font-medium text-slate-900 font-rajdhani dark:text-slate-300">{{ article.title }}</h1>
+            </header>
+
+            <section id="article-content" class="relative mt-8 rounded-lg border border-slate-200 bg-slate-50 p-4 shadow-md dark:border-slate-700 dark:bg-slate-800">
+                <section class="italic">
+                    {{ article.headingContent|markdownify }}
+                </section>
+
+                <section>
+                    {{ article.content|markdownify }}
+                </section>
+            </section>
+
+            <footer class="mt-4 rounded-lg border border-slate-200 bg-slate-50 p-4 shadow-md dark:border-slate-700 dark:bg-slate-800">
+                <div class="flex flex-col text-xs">
+                    <div class="flex grow flex-wrap gap-1.5">
+                        {% for tag in article.tags %}
+                            {% include('_global/_tags.html.twig') with {'tag': tag} %}
+                        {% endfor %}
+                    </div>
+
+                    <div class="mt-4 flex flex-col items-start text-slate-400 md:items-end">
+                        <p>Published by: <span class="text-slate-500 dark:text-slate-300">UserName</span> on
+                            <time class="cursor-help" title="{{ article.createdAt|date("c", "Europe/Paris") ~ 'GMT' }}" datetime="{{ article.createdAt|date("c", "Europe/Paris") }}">{{ article.createdAt|date("m/d/Y H:i", "Europe/Paris") }}</time>
+                        </p>
+                        {% if article.updatedAt != article.createdAt %}
+                            <p>Last edit:
+                                <time class="cursor-help" title="{{ article.updatedAt|date("c", "Europe/Paris") ~ 'GMT' }}" datetime="{{ article.updatedAt|date("c", "Europe/Paris") }}">{{ article.updatedAt|date("m/d/Y H:i", "Europe/Paris") }}</time>
+                            </p>
+                        {% endif %}
+                    </div>
+                </div>
+            </footer>
+        </article>
+    </main>
+{% endblock %}
