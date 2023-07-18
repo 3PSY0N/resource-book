@@ -1,0 +1,81 @@
+<div x-data="{ mainMenu: false }" @keydown.window.escape="mainMenu = false">
+    <div class="relative lg:hidden" :class="mainMenu ? 'z-10' : 'z-5'"
+         role="dialog" aria-modal="true" x-show="mainMenu"
+         x-description="Off-canvas menu for mobile." x-ref="dialog"
+    >
+        <div x-show="mainMenu"
+             x-transition:enter="transition-opacity ease-linear duration-300"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100"
+             x-transition:leave="transition-opacity ease-linear duration-300"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             class="fixed inset-0 bg-slate-900/90 dark:bg-slate-900/50"
+             x-description="Off-canvas menu backdrop."
+        ></div>
+
+        <div class="fixed inset-0 flex">
+            <div x-show="mainMenu"
+                 x-transition:enter="transition ease-in-out duration-300 transform"
+                 x-transition:enter-start="-translate-x-full"
+                 x-transition:enter-end="translate-x-0"
+                 x-transition:leave="transition ease-in-out duration-300 transform"
+                 x-transition:leave-start="translate-x-0"
+                 x-transition:leave-end="-translate-x-full"
+                 x-description="Off-canvas menu, show/hide based on off-canvas menu state."
+                 class="relative mr-16 flex w-full max-w-xs flex-1"
+                 @click.away="mainMenu = false">
+                <div x-show="mainMenu"
+                     x-transition:enter="ease-in-out duration-300"
+                     x-transition:enter-start="opacity-0"
+                     x-transition:enter-end="opacity-100"
+                     x-transition:leave="ease-in-out duration-300"
+                     x-transition:leave-start="opacity-100"
+                     x-transition:leave-end="opacity-0"
+                     x-description="Close button, show/hide based on off-canvas menu state."
+                     class="absolute top-0 left-full flex w-16 justify-center pt-5"
+                >
+                    <button type="button" class="-m-2.5 p-2.5" @click="mainMenu = !mainMenu">
+                        <span class="sr-only">Close sidebar</span>
+                        <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+
+                {# Sidebar Mobile #}
+                {% include 'admin/_partials/navlinks.html.twig' %}
+            </div>
+        </div>
+    </div>
+
+    {# Sidebar Desktop #}
+    <div class="hidden lg:fixed lg:inset-y-0 lg:z-10 lg:flex lg:w-72 lg:flex-col">
+        {% include 'admin/_partials/navlinks.html.twig' %}
+    </div>
+
+    <div class="sticky top-0 flex items-center gap-x-6 bg-slate-100 px-4 py-4 shadow-sm z-5 dark:bg-slate-950 sm:px-6 lg:ml-72">
+        <button type="button" class="text-gray-700 -m-2.5 p-2.5 lg:hidden" @click="mainMenu = !mainMenu">
+            <span class="sr-only">Open sidebar</span>
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+            </svg>
+        </button>
+        <div class="flex-1 text-sm font-semibold leading-6 text-slate-900 dark:text-slate-300">Dashboard</div>
+        <div class="relative z-0 hidden flex-1 items-center justify-center px-2 sm:absolute sm:inset-0 lg:flex">
+            <div class="w-full sm:max-w-xs">
+                <form method="get" action="{{ path('public_article_search') }}">
+                    <label for="search" class="sr-only">Search</label>
+                    <div class="relative">
+                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                            <svg class="h-5 w-5 text-slate-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <input id="search" name="q" class="block w-full rounded-md border border-slate-300 bg-slate-100 px-2 py-2 pr-3 pl-10 text-slate-900 shadow-sm transition focus:border-slate-400 focus:ring-2 focus:ring-slate-400 focus:ring-opacity-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100" placeholder="Search articles.." type="search">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
