@@ -38,7 +38,7 @@ html {
     @apply p-8;
 }
 
-#article-content, .editor-preview-active {
+#article-content, .editor-preview-active, .editor-preview-active-side {
     @apply text-slate-900 dark:text-slate-300;
 
     h1 {
@@ -236,20 +236,4 @@ html {
 
 .bg-squares {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(15 23 42 / 0.04)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
-}
-
-.EasyMDEContainer {
-    @apply mt-4;
-
-    .editor-toolbar {
-        @apply mb-2 rounded-md bg-white;
-    }
-
-    .CodeMirror {
-        @apply rounded-md
-    }
-
-    .editor-statusbar {
-        @apply mt-2 rounded-md bg-white;
-    }
 }

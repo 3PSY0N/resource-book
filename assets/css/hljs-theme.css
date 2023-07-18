@@ -1,4 +1,4 @@
-.hljs {
+.hljs, .editor-preview-active-side pre code {
   display: block;
   overflow-x: auto;
   padding: 1rem;
@@ -92,7 +92,7 @@ Original One Dark Syntax theme from https://github.com/atom/one-dark-syntax
 */
 
 html.dark {
-  .hljs {
+  .hljs, .editor-preview-active-side pre code {
     display: block;
     overflow-x: auto;
     padding: 1rem;
