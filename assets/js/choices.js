@@ -14,7 +14,7 @@ const choices = new Choices(element, {
     shouldSort: true,
     shouldSortItems: false,
     placeholder: true,
-    placeholderValue: 'Search for categories',
+    placeholderValue: 'Search for tags',
     classNames: {
         containerOuter: 'choices',
         containerInner: 'choices__inner',
