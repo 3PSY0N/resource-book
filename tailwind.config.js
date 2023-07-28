@@ -32,6 +32,7 @@ module.exports = {
       },
       fontFamily: {
         rajdhani: ['Rajdhani, sans-serif'],
+        fontawesome: ['FontAwesome'],
       },
       maxWidth: {
         'screen-fhd': '120rem',
