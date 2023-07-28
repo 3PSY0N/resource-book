@@ -2,6 +2,8 @@
 
 namespace App\Twig\Runtime;
 
+use App\Service\CommonMark\AdmonitionExtension\AdmonitionExtension;
+use App\Service\CommonMark\AdmonitionExtension\NoteBlockExtension;
 use App\Service\CommonMark\MarkerExtension\MarkerExtension;
 use App\Service\CommonMark\YouTube;
 use League\CommonMark\Environment\Environment;
@@ -14,6 +16,7 @@ use League\CommonMark\Extension\DefaultAttributes\DefaultAttributesExtension;
 use League\CommonMark\Extension\DisallowedRawHtml\DisallowedRawHtmlExtension;
 use League\CommonMark\Extension\ExternalLink\ExternalLinkExtension;
 use League\CommonMark\Extension\Footnote\FootnoteExtension;
+use League\CommonMark\Extension\GithubFlavoredMarkdownExtension;
 use League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension;
 use League\CommonMark\Extension\Mention\MentionExtension;
 use League\CommonMark\Extension\Strikethrough\StrikethroughExtension;
@@ -30,7 +33,7 @@ use Ueberdosis\CommonMark\Services\Vimeo;
 
 class CommonMarkExtensionRuntime implements RuntimeExtensionInterface
 {
-    private Environment $environment;
+    private Environment       $environment;
     private MarkdownConverter $converter;
 
     public function __construct()
@@ -53,10 +56,10 @@ class CommonMarkExtensionRuntime implements RuntimeExtensionInterface
     public function setConfig(): void
     {
         $config = [
-            'table' => [
-                'wrap' => [
-                    'enabled' => true,
-                    'tag' => 'div',
+            'table'               => [
+                'wrap'                 => [
+                    'enabled'    => true,
+                    'tag'        => 'div',
                     'attributes' => [
                         'class' => 'table-overflow'
                     ],
@@ -70,39 +73,39 @@ class CommonMarkExtensionRuntime implements RuntimeExtensionInterface
             'disallowed_raw_html' => [
                 'disallowed_tags' => ['title', 'textarea', 'input', 'style', 'xmp', 'iframe', 'noembed', 'noframes', 'script', 'plaintext'],
             ],
-            'html_input' => 'allow',
-            'allow_unsafe_links' => false,
-            'max_nesting_level' => 10,
-            'external_link' => [
-                'internal_hosts' => 'www.example.com', // TODO: Don't forget to set this!
+            'html_input'          => 'allow',
+            'allow_unsafe_links'  => false,
+            'max_nesting_level'   => 10,
+            'external_link'       => [
+                'internal_hosts'     => 'www.example.com', // TODO: Don't forget to set this!
                 'open_in_new_window' => true,
-                'html_class' => 'external-link',
-                'nofollow' => 'external',
-                'noopener' => 'external',
-                'noreferrer' => 'external',
+                'html_class'         => 'external-link',
+                'nofollow'           => 'external',
+                'noopener'           => 'external',
+                'noreferrer'         => 'external',
             ],
-            'default_attributes' => [
-                Heading::class => [
+            'default_attributes'  => [
+                Heading::class   => [
                     'class' => static function (Heading $node) {
 //                        if ($node->getLevel() === 1) {
-                            return 'group font-rajdhani font-medium';
+                        return 'group font-rajdhani font-medium';
 //                        } else {
 //                            return null;
 //                        }
                     },
                 ],
-                Table::class => [
+                Table::class     => [
                     'class' => 'table-auto',
                 ],
                 Paragraph::class => [
                     'class' => [],
                 ],
             ],
-            'embeds' => [
+            'embeds'              => [
                 new YouTube(),
                 new Vimeo(),
             ],
-            'footnote' => [
+            'footnote'            => [
                 'backref_class'      => 'fn-backref',
                 'backref_symbol'     => '↩',
                 'container_add_hr'   => true,
@@ -112,21 +115,21 @@ class CommonMarkExtensionRuntime implements RuntimeExtensionInterface
                 'footnote_class'     => 'footnote',
                 'footnote_id_prefix' => 'go-ref:',
             ],
-            'heading_permalink' => [
-                'html_class' => 'permalink',
-                'id_prefix' => '',
+            'heading_permalink'   => [
+                'html_class'          => 'permalink',
+                'id_prefix'           => '',
                 'apply_id_to_heading' => false,
-                'heading_class' => '',
-                'fragment_prefix' => '',
-                'insert' => 'before',
-                'min_heading_level' => 1,
-                'max_heading_level' => 6,
-                'title' => 'Permalink',
-//                'symbol' => HeadingPermalinkRenderer::DEFAULT_SYMBOL,
-                'symbol' => '#',
-                'aria_hidden' => true,
+                'heading_class'       => '',
+                'fragment_prefix'     => '',
+                'insert'              => 'before',
+                'min_heading_level'   => 1,
+                'max_heading_level'   => 6,
+                'title'               => 'Permalink',
+                //                'symbol' => HeadingPermalinkRenderer::DEFAULT_SYMBOL,
+                'symbol'              => '#',
+                'aria_hidden'         => true,
             ],
-            'mentions' => [
+            'mentions'            => [
                 // Twitter handler mention configuration.
                 // Sample Input:  `@colinodell`
                 // Sample Output: `<a href="https://www.twitter.com/colinodell">@colinodell</a>`
@@ -141,6 +144,12 @@ class CommonMarkExtensionRuntime implements RuntimeExtensionInterface
                     'generator' => 'https://twitter.com/%s',
                 ],
             ],
+        ];
+
+        $admonition = [
+            'class_prefix' => 'admonition',
+            'html_tag'     => 'blockquote',
+            'title_tag'    => 'title',
         ];
 
         $this->environment = new Environment($config);
@@ -159,7 +168,7 @@ class CommonMarkExtensionRuntime implements RuntimeExtensionInterface
         $this->environment->addExtension(new HeadingPermalinkExtension());
         $this->environment->addExtension(new MarkerExtension());
         $this->environment->addExtension(new MentionExtension());
+        $this->environment->addExtension(new AdmonitionExtension($admonition));
         $this->converter = new MarkdownConverter($this->environment);
     }
-
 }
