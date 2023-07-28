@@ -44,23 +44,18 @@ html {
     h1 {
         @apply mt-10 mb-4 text-4xl;
     }
-
     h2 {
         @apply mt-8 mb-4 text-3xl;
     }
-
     h3 {
         @apply mt-6 mb-4 text-2xl;
     }
-
     h4 {
         @apply mt-6 mb-4 text-xl;
     }
-
     h5, h6 {
         @apply my-4 text-lg;
     }
-
     h1,
     h2,
     h3,
@@ -73,6 +68,61 @@ html {
         dark:before:bg-gradient-to-r dark:before:from-slate-800 dark:before:to-slate-500
         before:origin-top-left before:transition-all before:duration-300 before:ease-out
         before:scale-x-[20%] hover:before:scale-x-100;
+    }
+    h1.group, h2.group, h3.group, h4.group, h5.group, h6.group {
+        a {
+            @apply mr-1 before:hidden font-extralight opacity-30 transition-all duration-300 ease-out;
+        }
+    }
+    h1.group:hover, h2.group:hover, h3.group:hover, h4.group:hover, h5.group:hover, h6.group:hover {
+        a {
+            @apply font-semibold text-indigo-500 opacity-100;
+        }
+    }
+
+    ul {
+        @apply mt-4 list-inside marker:text-slate-500 list-[disclosure-closed] dark:marker:text-slate-500;
+    }
+
+    ol {
+        @apply mt-4 list-inside list-decimal marker:text-slate-500 dark:marker:text-slate-500;
+    }
+
+    ol, ul {
+        code {
+            @apply bg-gradient-to-r from-blue-400/30 to-indigo-400/30 p-0.5 dark:from-blue-500/30 dark:to-indigo-500/30;
+        }
+    }
+
+    li p {
+        @apply m-0;
+    }
+
+    li ul, li ol {
+        @apply m-0 pl-4;
+    }
+
+    p {
+        @apply mb-4 last:mb-0;
+
+        code {
+            @apply bg-gradient-to-r from-blue-400/30 to-indigo-400/30 p-0.5 dark:from-blue-500/30 dark:to-indigo-500/30;
+        }
+    }
+
+    a {
+        @apply relative z-1 p-0.5
+        before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-full before:h-[3px] before:-z-1
+        before:transition-all before:bg-gradient-to-r before:from-blue-400/30 before:to-indigo-400/30
+        hover:before:bottom-0 hover:before:h-full after:text-indigo-300;
+    }
+
+    mark {
+        @apply bg-yellow-300 px-1;
+    }
+
+    hr {
+        @apply my-8 h-px border-0 bg-gradient-to-r from-transparent via-indigo-400 to-transparent;
     }
 
     blockquote {
@@ -98,99 +148,6 @@ html {
         border border-slate-200 dark:border-slate-800 rounded-md
         shadow-md dark:shadow-slate-950/40
         last:m-0;
-    }
-
-    ul {
-        @apply mt-4 list-inside marker:text-slate-500 list-[disclosure-closed] dark:marker:text-slate-500;
-    }
-
-    ol {
-        @apply mt-4 list-inside list-decimal marker:text-slate-500 dark:marker:text-slate-500;
-    }
-
-    li p {
-        @apply m-0;
-    }
-
-    li ul, li ol {
-        @apply m-0 pl-4;
-    }
-
-    a {
-        @apply relative z-1 p-0.5
-        before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-full before:h-[3px] before:-z-1
-        before:transition-all before:bg-gradient-to-r before:from-blue-400/30 before:to-indigo-400/30
-        hover:before:bottom-0 hover:before:h-full after:text-indigo-300;
-    }
-
-    .fn-ref, .fn-backref {
-        @apply px-1 text-base text-blue-400 transition before:content-none hover:text-yellow-600 dark:hover:text-yellow-400;
-    }
-
-    .footnotes {
-        @apply text-sm;
-
-        ol > li {
-            @apply list-inside;
-        }
-
-        ol > li > p {
-            @apply inline-block;
-        }
-
-        hr {
-            @apply mt-8 h-px border-0 bg-gradient-to-r from-transparent via-indigo-400 to-transparent;
-        }
-    }
-
-    h1.group, h2.group, h3.group, h4.group, h5.group, h6.group {
-        a {
-            @apply mr-1 before:hidden font-extralight opacity-30 transition-all duration-300 ease-out;
-        }
-    }
-
-    h1.group:hover, h2.group:hover, h3.group:hover, h4.group:hover, h5.group:hover, h6.group:hover {
-        a {
-            @apply font-semibold text-indigo-500 opacity-100;
-        }
-    }
-
-    hr {
-        @apply my-8 h-px border-0 bg-gradient-to-r from-transparent via-indigo-400 to-transparent;
-    }
-
-    .heading-permalink {
-        @apply mr-2;
-    }
-
-    iframe.video {
-        @apply mx-auto aspect-video w-full max-w-2xl;
-    }
-
-    mark {
-        @apply bg-yellow-300 px-1;
-    }
-
-    ol, ul {
-        code {
-            @apply bg-gradient-to-r from-blue-400/30 to-indigo-400/30 p-0.5 dark:from-blue-500/30 dark:to-indigo-500/30;
-        }
-    }
-
-    p {
-        @apply mb-4 last:mb-0;
-
-        code {
-            @apply bg-gradient-to-r from-blue-400/30 to-indigo-400/30 p-0.5 dark:from-blue-500/30 dark:to-indigo-500/30;
-        }
-    }
-
-    input[type=checkbox] {
-        @apply rounded border-indigo-200 text-indigo-500 border dark:border-0 checked:opacity-100 [&:not(checked)]:opacity-60;
-    }
-
-    .table-overflow {
-        @apply relative my-6 overflow-x-auto rounded shadow-md;
     }
 
     table {
@@ -227,6 +184,134 @@ html {
             @apply ml-2 font-light italic;
         }
     }
+
+    iframe.video {
+        @apply mx-auto aspect-video w-full max-w-2xl;
+    }
+
+    input[type=checkbox] {
+        @apply rounded border-indigo-200 text-indigo-500 border dark:border-0 checked:opacity-100 [&:not(checked)]:opacity-60;
+    }
+
+    blockquote.admonition {
+        a {
+            @apply before:!h-0 underline underline-offset-4 font-medium hover:underline-offset-2;
+        }
+
+        pre code {
+            @apply bg-white/80 dark:bg-slate-900/90;
+        }
+
+        p code {
+            @apply bg-none bg-white/70 dark:bg-slate-900/50;
+        }
+
+        .title {
+            @apply text-base font-medium;
+
+            &::before {
+                @apply mr-2 font-fontawesome;
+            }
+        }
+
+        &.warning {
+            @apply bg-none border-l-[#F5BB3D] bg-[#FBE4B1] dark:bg-[#835C07]/50 dark:text-yellow-50 text-yellow-900;
+
+            .title {
+                &::before {
+                    @apply content-['\f071'] text-yellow-900 dark:text-yellow-50;
+                }
+            }
+        }
+
+        &.danger {
+            @apply bg-none border-l-[#EF4444] bg-[#FCDADA] dark:bg-[#800B0B]/50 text-red-900 dark:text-red-50;
+
+            .title {
+                &::before {
+                    @apply content-['\f06d'] text-red-900 dark:text-red-50 ;
+                }
+            }
+        }
+
+        &.important {
+            @apply bg-none border-l-[#6366F1] bg-[#EDE9FE] dark:bg-[#3B3F8C]/50 text-indigo-900 dark:text-indigo-50;
+
+            .title {
+                &::before {
+                    @apply content-['\f132'] text-indigo-900 dark:text-indigo-50;
+                }
+            }
+        }
+
+        &.notice {
+            @apply bg-none border-l-[#3B82F6] bg-[#DBEAFE] dark:bg-[#1D4ED8]/50 text-blue-900 dark:text-blue-50;
+
+            .title {
+                &::before {
+                    @apply content-['\f05a'] text-blue-900 dark:text-blue-50;
+                }
+            }
+        }
+
+        &.tip {
+            @apply bg-none border-l-[#10B981] bg-[#D1FAE5] dark:bg-[#047857]/50 text-green-900 dark:text-green-50;
+
+            .title {
+                &::before {
+                    @apply content-['\f0eb'] text-green-900 dark:text-green-50;
+                }
+            }
+        }
+
+        &.note {
+            @apply bg-none border-l-[#6B7280] bg-[#E5E7EB] dark:bg-[#374151]/50 text-gray-900 dark:text-gray-50;
+
+            .title {
+                &::before {
+                    @apply content-['\f040'] text-gray-900 dark:text-gray-50;
+                }
+            }
+        }
+
+        &.question {
+            @apply bg-none border-l-[#84CC16] bg-[#ECFCCB] dark:bg-[#4B6D0B]/50 text-lime-900 dark:text-lime-50;
+
+            .title {
+                &::before {
+                    @apply content-['\f059'] text-lime-900 dark:text-lime-50;
+                }
+            }
+        }
+    }
+
+    .fn-ref, .fn-backref {
+        @apply px-1 text-base text-blue-400 transition before:content-none hover:text-yellow-600 dark:hover:text-yellow-400;
+    }
+
+    .footnotes {
+        @apply text-sm;
+
+        ol > li {
+            @apply list-inside;
+        }
+
+        ol > li > p {
+            @apply inline-block;
+        }
+
+        hr {
+            @apply mt-8 h-px border-0 bg-gradient-to-r from-transparent via-indigo-400 to-transparent;
+        }
+    }
+
+    .heading-permalink {
+        @apply mr-2;
+    }
+
+    .table-overflow {
+        @apply relative my-6 overflow-x-auto rounded shadow-md;
+    }
 }
 
 .dark .bg-squares {
@@ -235,88 +320,4 @@ html {
 
 .bg-squares {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(15 23 42 / 0.04)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
-}
-
-blockquote.admonition {
-    a {
-        @apply before:!h-0 underline underline-offset-4 font-medium hover:underline-offset-2;
-    }
-
-    .title {
-        @apply text-base font-medium;
-
-        &::before {
-            @apply mr-2 font-fontawesome;
-        }
-    }
-
-    &.warning {
-        @apply !bg-none !border-l-[#F5BB3D] !bg-[#FBE4B1] dark:!bg-[#835C07]/50 dark:text-yellow-50 text-yellow-900;
-
-        .title {
-            &::before {
-                @apply content-['\f071'] text-yellow-900 dark:text-yellow-50;
-            }
-        }
-    }
-
-    &.danger {
-        @apply !bg-none !border-l-[#EF4444] !bg-[#FCDADA] dark:!bg-[#800B0B]/50 text-red-900 dark:text-red-50;
-
-        .title {
-            &::before {
-                @apply content-['\f06d'] text-red-900 dark:text-red-50 ;
-            }
-        }
-    }
-
-    &.important {
-        @apply !bg-none !border-l-[#6366F1] !bg-[#EDE9FE] dark:!bg-[#3B3F8C]/50 text-indigo-900 dark:text-indigo-50;
-
-        .title {
-            &::before {
-                @apply content-['\f132'] text-indigo-900 dark:text-indigo-50;
-            }
-        }
-    }
-
-    &.notice {
-        @apply !bg-none !border-l-[#3B82F6] !bg-[#DBEAFE] dark:!bg-[#1D4ED8]/50 text-blue-900 dark:text-blue-50;
-
-        .title {
-            &::before {
-                @apply content-['\f05a'] text-blue-900 dark:text-blue-50;
-            }
-        }
-    }
-
-    &.tip {
-        @apply !bg-none !border-l-[#10B981] !bg-[#D1FAE5] dark:!bg-[#047857]/50 text-green-900 dark:text-green-50;
-
-        .title {
-            &::before {
-                @apply content-['\f0eb'] text-green-900 dark:text-green-50;
-            }
-        }
-    }
-
-    &.note {
-        @apply !bg-none !border-l-[#6B7280] !bg-[#E5E7EB] dark:!bg-[#374151]/50 text-gray-900 dark:text-gray-50;
-
-        .title {
-            &::before {
-                @apply content-['\f040'] text-gray-900 dark:text-gray-50;
-            }
-        }
-    }
-
-    &.question {
-        @apply !bg-none !border-l-[#84CC16] !bg-[#ECFCCB] dark:!bg-[#4B6D0B]/50 text-lime-900 dark:text-lime-50;
-
-        .title {
-            &::before {
-                @apply content-['\f059'] text-lime-900 dark:text-lime-50;
-            }
-        }
-    }
 }
