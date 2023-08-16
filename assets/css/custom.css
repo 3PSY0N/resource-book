@@ -22,15 +22,15 @@ html {
 
 .clr-field {
     input {
-        @apply !text-[#505050];
+        @apply !text-slate-900;
     }
 
     button {
-        @apply shadow-none !-mt-px after:!rounded-full !cursor-pointer !bg-none;
+        @apply !-mt-px !bg-none;
     }
 
     button:after {
-        @apply shadow border-2 cursor-pointer left-0 !top-1/2 !h-[70%] -translate-y-1/2;
+        @apply !rounded-r-md;
     }
 }
 
