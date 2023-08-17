@@ -1,0 +1,31 @@
+{{ form_start(form) }}
+
+<div class="mt-4 flex flex-col flex-wrap content-center justify-center gap-4">
+    <div class="flex flex-col gap-2">
+        {{ form_label(form.name, 'Name*', { 'label_attr': { 'class': 'text-slate-900 dark:text-slate-100' }}) }}
+        {{ form_widget(form.name, {'attr': {
+            'class': 'w-full rounded border text-slate-900 dark:text-slate-100 border-slate-300 bg-slate-100 shadow p-2.5 dark:border-slate-600 dark:bg-slate-700',
+        }}) }}
+
+        {{ form_errors(form.name) }}
+    </div>
+    <div class="mt-4 flex flex-col gap-2">
+        {{ form_label(form.fgColor, '', { 'label_attr': { 'class': 'text-slate-900 dark:text-slate-100' }}) }}
+        {{ form_widget(form.fgColor, {'attr': {
+            'class': 'w-full rounded border text-slate-900 dark:!text-slate-100 border-slate-300 bg-slate-100 shadow p-2.5 dark:border-slate-600 dark:bg-slate-700',
+        }}) }}
+        {{ form_errors(form.fgColor) }}
+    </div>
+    <div class="mt-4 flex flex-col gap-2">
+        {{ form_label(form.bgColor, '', { 'label_attr': { 'class': 'text-slate-900 dark:text-slate-100' }}) }}
+        {{ form_widget(form.bgColor, {'attr': {
+            'class': 'w-full rounded border text-slate-900 dark:!text-slate-100 border-slate-300 bg-slate-100 shadow p-2.5 dark:border-slate-600 dark:bg-slate-700',
+        }}) }}
+        {{ form_errors(form.bgColor) }}
+    </div>
+</div>
+
+<div class="mt-8 mb-16 flex justify-center gap-2">
+    <button class="rounded bg-slate-100 px-4 py-2 text-sm font-medium transition hover:bg-slate-600 hover:text-slate-100 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:hover:text-slate-100">{{ button_label|default('Save tag') }}</button>
+</div>
+{{ form_end(form) }}

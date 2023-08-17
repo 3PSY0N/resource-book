@@ -1,6 +1,6 @@
 {% extends 'admin/base.html.twig' %}
 
-{% set title = "Create new tag" %}
+{% set title = "Edit tag: " ~ tag.name %}
 
 {% block title %}{{ title }}{% endblock %}
 
@@ -18,22 +18,13 @@
     <main class="mx-auto w-full max-w-screen-lg grow p-4">
         <div class="flex justify-end gap-2">
             <a class="self-center rounded bg-slate-100 px-4 py-2 text-sm font-medium transition hover:bg-slate-600 hover:text-slate-100 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:hover:text-slate-100" href="{{ path('admin_tag_index') }}">Back to Tags</a>
+            <div class="flex content-center py-2">
+                {{ include('admin/tag/_delete_form.html.twig') }}
+            </div>
         </div>
 
         <h1 class="mt-4 mb-12 inline-flex text-center text-4xl font-medium text-slate-900 font-rajdhani dark:text-slate-100">{{ title }}</h1>
 
         {{ include('admin/tag/_form.html.twig') }}
-
-        <section class="mt-24">
-            <h2 class="border-b-2 border-b-slate-400/20 text-xl font-medium text-slate-900 font-rajdhani dark:text-slate-100">Existing tags</h2>
-
-            <div class="mt-4 flex flex-wrap gap-2">
-                {% for tag in tags %}
-                    <span class="inline-flex cursor-default items-center rounded-full bg-slate-500 px-2 py-1 text-center text-xs font-semibold text-slate-100">
-                        {{ tag.name|upper }}
-                    </span>
-                {% endfor %}
-            </div>
-        </section>
     </main>
 {% endblock %}
