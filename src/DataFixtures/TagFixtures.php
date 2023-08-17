@@ -40,6 +40,8 @@ class TagFixtures extends Fixture implements FixtureGroupInterface
             $tagEntity = new Tag();
 
             $tagEntity->setName($tag);
+            $tagEntity->setFgColor('#f1f5f9');
+            $tagEntity->setBgColor('#64748b');
 
             $manager->persist($tagEntity);
         }
