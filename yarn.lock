@@ -953,10 +953,10 @@ util-deprecate@^1.0.2:
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==
 
-vite-plugin-symfony@^0.7.8:
-  version "0.7.8"
-  resolved "https://registry.yarnpkg.com/vite-plugin-symfony/-/vite-plugin-symfony-0.7.8.tgz#10b4c17e258e3b7675ea4c72962cf9a15404a2ea"
-  integrity sha512-G/O1xYdK3SjoVfo44xTvM2/+AWCFV2p6bkP7TcKqtfoHxNz6EAIDCkHXOCLfBrdLWKpDWproaCxFglZJjdm/OQ==
+vite-plugin-symfony@^4.1.0:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/vite-plugin-symfony/-/vite-plugin-symfony-4.1.1.tgz#912e0acb79a883adcf7386ceb02a41d4fca05111"
+  integrity sha512-Dup9Q9rqJTuVxkJMrpBip+jhik0ebDFPoh6dGs0M6HSCMfYgZFLSpegYiD49UrzEGt5PGorWFMWwE3QXjl6JYg==
   dependencies:
     picocolors "^1.0.0"
     sirv "^2.0.2"
