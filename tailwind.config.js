@@ -31,7 +31,6 @@ module.exports = {
         5: "5",
       },
       fontFamily: {
-        rajdhani: ['Rajdhani, sans-serif'],
         fontawesome: ['FontAwesome'],
       },
       maxWidth: {
@@ -60,7 +59,7 @@ module.exports = {
       }
     },
     fontFamily: {
-      sans: ['"Poppins", sans-serif'],
+      sans: ['"Blinker", sans-serif'],
     },
   },
   plugins: [
