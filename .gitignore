@@ -22,4 +22,6 @@
 ###> pentatrion/vite-bundle ###
 /node_modules/
 /public/build/
+.yarnrc.yml
+/.yarn
 ###< pentatrion/vite-bundle ###
