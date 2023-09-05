@@ -3,7 +3,6 @@
 namespace App\Twig\Runtime;
 
 use App\Service\CommonMark\AdmonitionExtension\AdmonitionExtension;
-use App\Service\CommonMark\AdmonitionExtension\NoteBlockExtension;
 use App\Service\CommonMark\MarkerExtension\MarkerExtension;
 use App\Service\CommonMark\YouTube;
 use League\CommonMark\Environment\Environment;
@@ -16,7 +15,6 @@ use League\CommonMark\Extension\DefaultAttributes\DefaultAttributesExtension;
 use League\CommonMark\Extension\DisallowedRawHtml\DisallowedRawHtmlExtension;
 use League\CommonMark\Extension\ExternalLink\ExternalLinkExtension;
 use League\CommonMark\Extension\Footnote\FootnoteExtension;
-use League\CommonMark\Extension\GithubFlavoredMarkdownExtension;
 use League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension;
 use League\CommonMark\Extension\Mention\MentionExtension;
 use League\CommonMark\Extension\Strikethrough\StrikethroughExtension;
@@ -88,7 +86,7 @@ class CommonMarkExtensionRuntime implements RuntimeExtensionInterface
                 Heading::class   => [
                     'class' => static function (Heading $node) {
 //                        if ($node->getLevel() === 1) {
-                        return 'group font-rajdhani font-medium';
+                        return 'group font-medium';
 //                        } else {
 //                            return null;
 //                        }
