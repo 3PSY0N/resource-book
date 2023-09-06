@@ -88,6 +88,18 @@
             "tests/bootstrap.php"
         ]
     },
+    "spatie/symfony-ignition-bundle": {
+        "version": "0.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "0.0",
+            "ref": "5e504db6aa95f5d8f664f6c9e073c406fb60c85d"
+        },
+        "files": [
+            "config/packages/ignition.yaml"
+        ]
+    },
     "stof/doctrine-extensions-bundle": {
         "version": "1.7",
         "recipe": {
