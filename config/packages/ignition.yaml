@@ -1,0 +1,3 @@
+ignition:
+  dark_mode: true
+  application_path: '%kernel.project_dir%'
