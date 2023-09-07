@@ -20,14 +20,15 @@
 
     <script>
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
+            document.documentElement.classList.add('dark')
         } else {
-            document.documentElement.classList.remove('dark');
+            document.documentElement.classList.remove('dark')
         }
     </script>
 </head>
 <body class="relative flex flex-col min-h-[100dvh] bg-slate-300 dark:bg-slate-900 transition-colors max-w-screen-qhd">
-<div aria-hidden="true" class="bg-squares -z-1 absolute inset-x-0 h-[50rem] [mask-image:linear-gradient(0deg,transparent,black)]"></div>
+<div aria-hidden="true" class="bg-squares -z-1 absolute inset-x-0 h-full [mask-image:linear-gradient(0deg,transparent,black)] dark:opacity-50"></div>
+
 {% include 'public/_partials/navbar.html.twig' %}
 
 {% block body %}{% endblock %}
