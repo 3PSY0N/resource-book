@@ -1,22 +1,63 @@
-<!DOCTYPE html>
-
-<title>Hello LoginController!</title>
+{% extends 'public/base.html.twig' %}
 
 {% block body %}
-    {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+    <main class="mx-auto mt-16 flex w-full max-w-screen-lg grow flex-col items-center justify-center p-4 lg:mt-32">
+        <div class="w-full max-w-sm">
+            <h1 class='text-xl dark:text-slate-300 font'>Login</h1>
 
-    <form action="{{ path('public_login') }}" method="post">
-        <label for="username">Email:</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}">
+            {% if error %}
+                <div class='mt-4 rounded-md border border-red-500/50 bg-red-400/40 px-4 py-2 text-slate-900 dark:bg-red-400/30 dark:text-slate-100'>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="_password">
+            {{ form_start(form) }}
+            <div class="flex flex-col">
+                {{ form_label(form.username, 'Identifiant', {
+                    'label_attr': {
+                        'class': 'text-white invisible',
+                        'aria-hidden': 'true'
+                    },
+                }) }}
+                {{ form_widget(form.username, {
+                    full_name:'_username',
+                    attr: { class: 'block w-full rounded-md border border-slate-300 bg-slate-100 px-2 py-2 text-md text-slate-900 shadow-sm transition focus:border-slate-400 focus:ring-2 focus:ring-slate-400 focus:ring-opacity-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100' }
+                }) }}
+            </div>
 
-        <input type="hidden" name="_target_path" value="/account">
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-        <button type="submit">login</button>
-    </form>
+            <div class="flex flex-col">
+                {{ form_label(form.username, 'Password', {
+                    'label_attr': {
+                        'class': 'text-white invisible',
+                        'aria-hidden': 'true'
+                    },
+                }) }}
+                {{ form_widget(form.password, {
+                    full_name:'_password',
+                    attr: {
+                        autocomplete: 'current-password',
+                        class: 'block w-full rounded-md border border-slate-300 bg-slate-100 px-2 py-2 text-md text-slate-900 shadow-sm transition focus:border-slate-400 focus:ring-2 focus:ring-slate-400 focus:ring-opacity-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100',
+                    },
+                }) }}
+            </div>
 
+            <div class="mt-4 flex items-center">
+                {{ form_widget(form._remember_me, {
+                    full_name:'_remember_me',
+                    attr: { class: 'cursor-pointer rounded border-slate-200 bg-slate-100 text-slate-600 shadow-sm transition dark:bg-slate-900 dark:border-slate-600 focus:border-slate-400 focus:ring-2 focus:ring-opacity-50 focus:ring-offset-0 focus:ring-slate-400' }
+                }) }}
+                {{ form_label(form._remember_me, 'Remember me', {'label_attr': {'class': 'text-sm cursor-pointer font-light transition text-slate-600 dark:text-slate-100 ml-2'}}) }}
+            </div>
+
+            {{ form_widget(form._token, {
+                full_name:'_csrf_token',
+            }) }}
+
+            <div class="mt-8 text-center">
+                <button type="submit"
+                        class="rounded-md border border-slate-300 bg-slate-100 px-4 py-2 text-slate-900 shadow-sm transition dark:hover:bg-slate-700 hover:bg-slate-200 dark:border-slate-700 dark:text-slate-100 dark:bg-slate-800 dark:border-slate-70 text-md focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-opacity-50">
+                    Connexion
+                </button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </main>
 {% endblock %}
