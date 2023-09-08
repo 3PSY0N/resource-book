@@ -16,4 +16,5 @@ return [
     Knp\Bundle\PaginatorBundle\KnpPaginatorBundle::class => ['all' => true],
     Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['dev' => true, 'test' => true],
     Spatie\SymfonyIgnitionBundle\IgnitionBundle::class => ['dev' => true],
+    SymfonyCasts\Bundle\VerifyEmail\SymfonyCastsVerifyEmailBundle::class => ['all' => true],
 ];
