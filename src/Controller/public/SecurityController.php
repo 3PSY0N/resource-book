@@ -9,14 +9,19 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-class LoginController extends AbstractController
+class SecurityController extends AbstractController
 {
     #[Route('/login', name: 'public_login', methods: ['GET', 'POST'])]
-    public function index(AuthenticationUtils $authenticationUtils): Response
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
+        // if ($this->getUser()) {
+        //     return $this->redirectToRoute('target_path');
+        // }
+
         $lastUsername = $authenticationUtils->getLastUsername();
 
         $form = $this->createForm(LoginType::class);
+
         $form->get('username')->setData($lastUsername);
 
         return $this->render('public/login/index.html.twig', [
@@ -25,28 +30,29 @@ class LoginController extends AbstractController
         ]);
     }
 
-    #[Route('/login/success', name: 'public_login_success', methods: ['GET'])]
+    #[Route('/login/success', name: 'app_login_success', methods: ['GET'])]
     public function loginSuccess(): RedirectResponse
     {
         if (!$this->getUser()) {
             return $this->redirectToRoute('public_login');
         }
 
+        $this->addFlash('success', 'Welcome back!');
+
         return $this->redirectToRoute('admin_dashboard_index');
     }
 
-    /**
-     * @throws \Exception
-     */
-    #[Route('/logout', name: 'public_logout', methods: ['GET'])]
+    #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
     {
-        throw new \Exception('Don\'t forget to activate logout in security.yaml');
+        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 
-    #[Route('/logout/success', name: 'public_logout_success', methods: ['GET'])]
+    #[Route('/logout/success', name: 'app_logout_success', methods: ['GET'])]
     public function logoutSuccess(): RedirectResponse
     {
+        $this->addFlash('success', 'Disconnected successfully!');
+
         return $this->redirectToRoute('public_article_index');
     }
 }
