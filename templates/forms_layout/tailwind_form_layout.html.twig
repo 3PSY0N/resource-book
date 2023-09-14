@@ -33,9 +33,10 @@
 
 {%- block form_errors -%}
     {%- if errors|length > 0 -%}
+        {%- set error_attr = attr|merge({ class: attr.class|default(widget_class|default('text-red-700 italic text-sm')) }) -%}
         <ul>
             {%- for error in errors -%}
-                <li class="{{ error_item_class|default('text-red-700 italic text-sm') }}">{{ error.message }}</li>
+                <li {% if error_attr %}{% with { attr: error_attr } %}{{ block('attributes') }}{% endwith %}{% endif %}>{{ error.message }}</li>
             {%- endfor -%}
         </ul>
     {%- endif -%}
