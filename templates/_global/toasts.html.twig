@@ -26,7 +26,7 @@
     {% for label, messages in app.flashes %}
         {% for message in messages %}
             <div
-                class="relative w-full rounded border bg-slate-100 text-slate-900 shadow-lg transition toast-error  dark:border-slate-600 dark:text-slate-300 dark:bg-slate-700 sm:min-w-[20rem] sm:max-w-[32rem]"
+                class="relative w-full rounded border bg-slate-100 text-slate-900 shadow-lg transition toast-{{ label|lower }} dark:border-slate-600 dark:text-slate-300 dark:bg-slate-700 sm:min-w-[20rem] sm:max-w-[32rem]"
                 x-data="{ toast: true }"
                 x-show="toast"
                 x-transition:leave="transition ease-in duration-500"
