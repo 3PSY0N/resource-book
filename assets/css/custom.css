@@ -44,18 +44,23 @@ html {
     h1 {
         @apply mt-10 mb-4 text-4xl;
     }
+
     h2 {
         @apply mt-8 mb-4 text-3xl;
     }
+
     h3 {
         @apply mt-6 mb-4 text-2xl;
     }
+
     h4 {
         @apply mt-6 mb-4 text-xl;
     }
+
     h5, h6 {
         @apply my-4 text-lg;
     }
+
     h1,
     h2,
     h3,
@@ -69,11 +74,13 @@ html {
         before:origin-top-left before:transition-all before:duration-300 before:ease-out
         before:scale-x-[20%] hover:before:scale-x-100;
     }
+
     h1.group, h2.group, h3.group, h4.group, h5.group, h6.group {
         a {
             @apply mr-1 before:hidden font-extralight opacity-30 transition-all duration-300 ease-out;
         }
     }
+
     h1.group:hover, h2.group:hover, h3.group:hover, h4.group:hover, h5.group:hover, h6.group:hover {
         a {
             @apply font-semibold text-indigo-500 opacity-100;
@@ -324,4 +331,48 @@ html {
 
 .icon-green {
     @apply fill-green-400;
+}
+
+.toast-error {
+    .toast-label::before {
+        @apply w-5 h-5 self-center bg-slate-900 dark:bg-slate-300 transition content-[''];
+        mask: url('../img/icons/error.svg') no-repeat;
+    }
+
+    .toast-progress {
+        @apply bg-red-500;
+    }
+}
+
+.toast-warning {
+    .toast-label::before {
+        @apply w-5 h-5 self-center bg-slate-900 dark:bg-slate-300 transition content-[''];
+        mask: url('../img/icons/warning.svg') no-repeat;
+    }
+
+    .toast-progress {
+        @apply bg-yellow-500;
+    }
+}
+
+.toast-info {
+    .toast-label::before {
+        @apply w-5 h-5 self-center bg-slate-900 dark:bg-slate-300 transition content-[''];
+        mask: url('../img/icons/info.svg') no-repeat;
+    }
+
+    .toast-progress {
+        @apply bg-blue-500;
+    }
+}
+
+.toast-success {
+    .toast-label::before {
+        @apply w-5 h-5 self-center bg-slate-900 dark:bg-slate-300 transition content-[''];
+        mask: url('../img/icons/success.svg') no-repeat;
+    }
+
+    .toast-progress {
+        @apply bg-green-500;
+    }
 }
