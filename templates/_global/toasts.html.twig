@@ -24,25 +24,27 @@
     {% endif %}
 
     {% for label, messages in app.flashes %}
-    {% for message in messages %}
-    <div
-        class="relative w-full rounded border bg-slate-100 text-slate-900 shadow-lg transition toast-error  dark:border-slate-600 dark:text-slate-300 dark:bg-slate-700 sm:min-w-[20rem] sm:max-w-[32rem]"
-        x-data="{ toast: true }"
-        x-show="toast"
-        x-transition:leave="transition ease-in duration-500"
-        x-transition:leave-start="opacity-100"
-        x-transition:leave-end="opacity-0"
-        x-init="setTimeout(() => toast = false, 10000)"
-    >
-        <button class="absolute top-4 right-2" @click="toast = false">
-            <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-        </button>
-        <div class='py-4 pr-8 pl-4 font-light'>
-            <p class="flex gap-1 text-lg font-medium toast-label">{{ label|capitalize }}</p>
-            <p>{{ message }}</p>
-        </div>
-        <div class='absolute bottom-0 rounded-b toast-progress h-1.5 animate-[progress_10s_linear_1_forwards]'></div>
-    </div>
+        {% for message in messages %}
+            <div
+                class="relative w-full rounded border bg-slate-100 text-slate-900 shadow-lg transition toast-error  dark:border-slate-600 dark:text-slate-300 dark:bg-slate-700 sm:min-w-[20rem] sm:max-w-[32rem]"
+                x-data="{ toast: true }"
+                x-show="toast"
+                x-transition:leave="transition ease-in duration-500"
+                x-transition:leave-start="opacity-100"
+                x-transition:leave-end="opacity-0"
+                x-init="setTimeout(() => toast = false, 10000)"
+            >
+                <button class="absolute top-4 right-2" @click="toast = false">
+                    <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+                <div class='py-4 pr-8 pl-4 font-light'>
+                    <p class="flex gap-1 text-lg font-medium toast-label">{{ label|capitalize }}</p>
+                    <p>{{ message }}</p>
+                </div>
+                <div class='absolute bottom-0 rounded-b toast-progress h-1.5 animate-[progress_10s_linear_1_forwards]'></div>
+            </div>
+        {% endfor %}
+    {% endfor %}
 </div>
