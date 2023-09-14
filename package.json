@@ -1,27 +1,28 @@
 {
-    "license": "UNLICENSED",
-    "private": true,
-    "scripts": {
-        "dev": "vite",
-        "build": "vite build"
-    },
-    "devDependencies": {
-        "@alpinejs/collapse": "^3.12.3",
-        "@tailwindcss/aspect-ratio": "^0.4.2",
-        "@tailwindcss/forms": "^0.5.4",
-        "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
-        "alpinejs": "^3.12.3",
-        "autoprefixer": "^10.4.14",
-        "easymde": "^2.18.0",
-        "highlight.js": "^11.7.0",
-        "postcss": "^8.4.22",
-        "postcss-import": "^15.1.0",
-        "tailwindcss": "^3.3.3",
-        "vite": "^4.4.9",
-        "vite-plugin-symfony": "^4.1.0"
-    },
-    "dependencies": {
-        "@melloware/coloris": "^0.21.0",
-        "choices.js": "^10.2.0"
-    }
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@alpinejs/collapse": "^3.12.3",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/forms": "^0.5.4",
+    "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
+    "alpinejs": "^3.12.3",
+    "autoprefixer": "^10.4.14",
+    "easymde": "^2.18.0",
+    "highlight.js": "^11.7.0",
+    "postcss": "^8.4.22",
+    "postcss-import": "^15.1.0",
+    "tailwindcss": "^3.3.3",
+    "vite": "^4.4.9",
+    "vite-plugin-symfony": "^4.1.0"
+  },
+  "dependencies": {
+    "@melloware/coloris": "^0.21.0",
+    "choices.js": "^10.2.0"
+  }
 }
