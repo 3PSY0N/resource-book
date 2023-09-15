@@ -1,0 +1,65 @@
+<?php
+
+namespace App\Form;
+
+use App\Entity\User;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+
+class RegistrationFormType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            ->add('email', TextType::class, [
+                'required' => false,
+                'attr' => [
+                    'placeholder' => '*Email',
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'constraints.not_blank.email',
+                    ]),
+                    new Email([
+                        'message' => 'constraints.email_validation.email',
+                    ]),
+                    new Length([
+                        'min' => 6,
+                        'minMessage' => 'constraints.string_length.email.min',
+                        'max' => 250,
+                        'maxMessage' => 'constraints.string_length.email.max',
+                    ]),
+                ],
+            ])
+            ->add('plainPassword', PasswordType::class, [
+                'mapped' => false,
+                'attr' => [
+                    'autocomplete' => 'new-password',
+                    'placeholder' => '*Password',
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter a password',
+                    ]),
+                    new Length([
+                        'min' => 4,
+                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'max' => 250,
+                    ]),
+                ],
+            ]);
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => User::class,
+        ]);
+    }
+}
