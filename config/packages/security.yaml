@@ -28,7 +28,7 @@ security:
         domain: ~ # Defaults to the current domain from $_SERVER
       login_throttling:
         max_attempts: 3
-        interval: 10 seconds
+        interval: '10 minutes'
       # activate different ways to authenticate
       # https://symfony.com/doc/current/security.html#the-firewall
 
