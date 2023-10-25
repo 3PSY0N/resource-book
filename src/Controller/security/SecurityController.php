@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\public;
+namespace App\Controller\security;
 
 use App\Form\LoginType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,12 +11,12 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
-    #[Route('/login', name: 'public_login', methods: ['GET', 'POST'])]
+    #[Route('/login', name: 'app_login', methods: ['GET', 'POST'])]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
+        if ($this->getUser()) {
+            return $this->redirectToRoute('admin_profile_index');
+        }
 
         $lastUsername = $authenticationUtils->getLastUsername();
 
@@ -24,7 +24,7 @@ class SecurityController extends AbstractController
 
         $form->get('username')->setData($lastUsername);
 
-        return $this->render('public/login/index.html.twig', [
+        return $this->render('security/login/index.html.twig', [
             'form' => $form->createView(),
             'error' => $authenticationUtils->getLastAuthenticationError(),
         ]);
@@ -34,12 +34,14 @@ class SecurityController extends AbstractController
     public function loginSuccess(): RedirectResponse
     {
         if (!$this->getUser()) {
-            return $this->redirectToRoute('public_login');
+            return $this->redirectToRoute('app_login');
         }
 
-        $this->addFlash('success', 'Welcome back!');
+        if ($this->isGranted('ROLE_REGISTERED')) {
+            $this->addFlash('success', sprintf('Welcome back %s!', $this->getUser()->getUserIdentifier()));
+        }
 
-        return $this->redirectToRoute('admin_dashboard_index');
+        return $this->redirectToRoute('public_article_index');
     }
 
     #[Route(path: '/logout', name: 'app_logout')]

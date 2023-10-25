@@ -1,0 +1,9 @@
+constraints:
+  not_blank:
+    email: "Email cannot be blank."
+  email_validation:
+    email: "Please enter a valid email address."
+  string_length:
+    email:
+      min: "Your email address must contain at least {{ limit }} characters."
+      max: "Your email address must not exceed {{ limit }} characters."
