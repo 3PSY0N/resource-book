@@ -14,9 +14,9 @@ class SecurityController extends AbstractController
     #[Route('/login', name: 'app_login', methods: ['GET', 'POST'])]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
+        if ($this->getUser()) {
+            return $this->redirectToRoute('admin_profile_index');
+        }
 
         $lastUsername = $authenticationUtils->getLastUsername();
 
@@ -37,7 +37,9 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-        $this->addFlash('success', 'Welcome back!');
+        if ($this->isGranted('ROLE_REGISTERED')) {
+            $this->addFlash('success', sprintf('Welcome back %s!', $this->getUser()->getUserIdentifier()));
+        }
 
         return $this->redirectToRoute('public_article_index');
     }

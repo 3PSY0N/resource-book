@@ -40,6 +40,10 @@ class RegistrationController extends AbstractController
         LoginAuthenticator $authenticator,
         EntityManagerInterface $entityManager
     ): Response {
+        if ($this->getUser()) {
+            return $this->redirectToRoute('admin_profile_index');
+        }
+
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -79,7 +83,7 @@ class RegistrationController extends AbstractController
      * @throws TransportExceptionInterface
      */
     #[Route('/resend/email', name: 'app_resend_email')]
-    public function resendEmail(Request $request, TranslatorInterface $translator): Response
+    public function resendEmail(): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
 
@@ -117,7 +121,7 @@ class RegistrationController extends AbstractController
         try {
             $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
         } catch (VerifyEmailExceptionInterface $exception) {
-            $this->addFlash(FlashTypeEnum::ERROR->value, $translator->trans($exception->getReason(), [], 'VerifyEmailBundle'));
+            $this->addFlash(FlashTypeEnum::WARNING->value, $translator->trans($exception->getReason(), [], 'VerifyEmailBundle'));
 
             return $this->redirectToRoute('app_register');
         }
