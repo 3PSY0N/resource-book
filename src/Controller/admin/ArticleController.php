@@ -3,6 +3,7 @@
 namespace App\Controller\admin;
 
 use App\Entity\Article;
+use App\Enums\FlashTypeEnum;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use App\Repository\TagRepository;
@@ -37,7 +38,7 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/new', name: 'admin_article_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ArticleRepository $articleRepository): Response
+    public function new(Request $request, ArticleRepository $articleRepository, TagRepository $tagRepository): Response
     {
         $article = new Article();
 
@@ -45,6 +46,15 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $newTags = $form->get('newTag')->getData();
+
+            foreach ($newTags as $newTag) {
+                $existingTag = $tagRepository->findOneBy(['name' => $newTag->getName()]);
+
+                if (!$existingTag) {
+                    $article->addTag($newTag);
+                }
+            }
 
             $article->setUid(Uuid::uuid7()->toString());
             $articleRepository->save($article, true);
@@ -67,12 +77,22 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/{uid}/edit', name: 'admin_article_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Article $article, ArticleRepository $articleRepository): Response
+    public function edit(Request $request, Article $article, ArticleRepository $articleRepository, TagRepository $tagRepository): Response
     {
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $newTags = $form->get('newTag')->getData();
+
+            foreach ($newTags as $newTag) {
+                $existingTag = $tagRepository->findOneBy(['name' => $newTag->getName()]);
+
+                if (!$existingTag) {
+                    $article->addTag($newTag);
+                }
+            }
+
             $articleRepository->save($article, true);
 
             return $this->redirectToRoute('admin_article_edit', ['uid' => $article->getUid()], Response::HTTP_SEE_OTHER);
