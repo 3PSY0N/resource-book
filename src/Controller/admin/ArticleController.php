@@ -54,12 +54,12 @@ class ArticleController extends AbstractController
 
         return $this->render('admin/article/new.html.twig', [
             'article' => $article,
-            'form' => $form,
+            'form'    => $form,
         ]);
     }
 
     #[Route('/{slug}', name: 'admin_article_show', methods: ['GET'])]
-    public function show($slug, ArticleRepository $articleRepository): Response
+    public function show(string $slug, ArticleRepository $articleRepository): Response
     {
         return $this->render('admin/article/show.html.twig', [
             'article' => $articleRepository->findOneBySlug($slug)
@@ -67,7 +67,7 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/{uid}/edit', name: 'admin_article_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Article $article, ArticleRepository $articleRepository, TagRepository $categoryRepository): Response
+    public function edit(Request $request, Article $article, ArticleRepository $articleRepository): Response
     {
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
@@ -80,7 +80,7 @@ class ArticleController extends AbstractController
 
         return $this->render('admin/article/edit.html.twig', [
             'article' => $article,
-            'form' => $form,
+            'form'    => $form,
         ]);
     }
 
