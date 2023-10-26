@@ -20,19 +20,19 @@
 
     <script>
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
+            document.documentElement.classList.add('dark')
         } else {
-            document.documentElement.classList.remove('dark');
+            document.documentElement.classList.remove('dark')
         }
     </script>
 </head>
 <body class="flex flex-col bg-slate-300 min-h-[100dvh] dark:bg-slate-900">
-    {% include 'admin/_partials/navbar.html.twig' %}
-
-    <div class="flex grow flex-col transition-colors lg:pl-72">
-        {% block body %}{% endblock %}
-        {% include 'admin/_partials/footer.html.twig' %}
-    </div>
+{% include 'admin/_partials/navbar.html.twig' %}
+{% include '_global/toastsAdmin.html.twig' %}
+<div class="flex grow flex-col transition-colors lg:pl-72">
+    {% block body %}{% endblock %}
+    {% include 'admin/_partials/footer.html.twig' %}
+</div>
 </body>
 </html>
 
