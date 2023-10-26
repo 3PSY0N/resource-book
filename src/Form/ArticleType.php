@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Entity\Tag;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,8 +20,8 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                'label' => 'Title',
-                'attr' => [
+                'label'       => 'Title',
+                'attr'        => [
                     'placeholder' => 'Title'
                 ],
                 'constraints' => [
@@ -28,28 +29,34 @@ class ArticleType extends AbstractType
                         'message' => 'Please enter a title',
                     ]),
                     new Length([
-                        'max' => 255,
+                        'max'        => 255,
                         'maxMessage' => 'Your title should be at most {{ limit }} characters',
                     ])
                 ]
             ])
             ->add('tags', EntityType::class, [
-                'class' => Tag::class,
+                'class'    => Tag::class,
                 'multiple' => true,
                 'required' => false
             ])
+            ->add('newTag', CollectionType::class, [
+                'mapped'       => false,
+                'label'        => false,
+                'entry_type'   => 'App\Form\NewTagType',
+                'allow_add'    => true,
+                'by_reference' => false
+            ])
             ->add('headingContent', TextareaType::class, [
-                'label' => 'Heading Content',
+                'label'    => 'Heading Content',
                 'required' => false,
-                'attr' => [
+                'attr'     => [
                     'placeholder' => 'Heading paragraph (can be empty)'
                 ],
             ])
             ->add('content', TextareaType::class, [
-                'label' => 'Content',
+                'label'    => 'Content',
                 'required' => false
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
