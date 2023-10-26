@@ -1,7 +1,7 @@
 {{ form_start(form) }}
 <div class="flex flex-wrap items-center justify-center gap-8 lg:flex-nowrap">
     <div class="flex w-full flex-col self-start">
-        {{ form_label(form.title, 'Title*', { 'label_attr': { 'class': 'text-slate-900 dark:text-slate-100' }})}}
+        {{ form_label(form.title, 'Title*', { 'label_attr': { 'class': 'text-slate-900 dark:text-slate-100' }}) }}
         {{ form_widget(form.title, {'attr': {
             'class': 'mt-4 w-full rounded border text-slate-900 dark:text-slate-100 border-slate-300 bg-slate-100 shadow p-2.5 dark:border-slate-600 dark:bg-slate-700',
         }}) }}
@@ -9,13 +9,21 @@
     </div>
 
     <div class="w-full self-start">
-        {{ form_label(form.tags, [], { 'label_attr': { 'class': 'text-slate-900 dark:text-slate-100' }})}}
+        {{ form_label(form.tags, [], { 'label_attr': { 'class': 'text-slate-900 dark:text-slate-100' }}) }}
         {{ form_widget(form.tags, { 'attr': { 'class': 'select-tags mt-4' }}) }}
     </div>
 </div>
 
+<div>
+    <div id="tags-container" data-prototype="{{ form_widget(form.newTag.vars.prototype)|e('html_attr') }}">
+    </div>
+    <button type="button" id="add-tag" class="mt-4 p-2 bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none ">
+        Add new tag
+    </button>
+</div>
+
 <div class="mt-8">
-    {{ form_label(form.headingContent, [], { 'label_attr': { 'class': 'text-slate-900 dark:text-slate-100' }})}}
+    {{ form_label(form.headingContent, [], { 'label_attr': { 'class': 'text-slate-900 dark:text-slate-100' }}) }}
     {{ form_widget(form.headingContent, {'attr': {
         'class': 'mt-4 w-full rounded border text-slate-900 dark:text-slate-100 border-slate-300 bg-slate-100 shadow p-2.5 dark:border-slate-600 dark:bg-slate-700',
         'rows': '4',
@@ -25,7 +33,7 @@
 </div>
 
 <div class="mt-8">
-    {{ form_label(form.content, 'Content*', { 'label_attr': { 'class': 'text-slate-900 dark:text-slate-100' }})}}
+    {{ form_label(form.content, 'Content*', { 'label_attr': { 'class': 'text-slate-900 dark:text-slate-100' }}) }}
     {{ form_widget(form.content) }}
     {{ form_errors(form.content) }}
 </div>
