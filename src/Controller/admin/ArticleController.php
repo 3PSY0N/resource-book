@@ -3,6 +3,7 @@
 namespace App\Controller\admin;
 
 use App\Entity\Article;
+use App\Entity\Tag;
 use App\Enums\FlashTypeEnum;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
@@ -46,12 +47,15 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /**  @var Tag[] $newTags */
             $newTags = $form->get('newTag')->getData();
 
             foreach ($newTags as $newTag) {
                 $existingTag = $tagRepository->findOneBy(['name' => $newTag->getName()]);
 
-                if (!$existingTag) {
+                if ($existingTag) {
+                    $this->addFlash(FlashTypeEnum::ERROR->name, sprintf('Tag %s already exists', $newTag->getName()));
+                } else {
                     $article->addTag($newTag);
                 }
             }
@@ -83,12 +87,15 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /**  @var Tag[] $newTags */
             $newTags = $form->get('newTag')->getData();
 
             foreach ($newTags as $newTag) {
                 $existingTag = $tagRepository->findOneBy(['name' => $newTag->getName()]);
 
-                if (!$existingTag) {
+                if ($existingTag) {
+                    $this->addFlash(FlashTypeEnum::ERROR->name, sprintf('Tag %s already exists', $newTag->getName()));
+                } else {
                     $article->addTag($newTag);
                 }
             }
@@ -104,10 +111,10 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/{uid}', name: 'admin_article_delete', methods: ['POST'])]
+    #[Route('/{uid}/delete', name: 'admin_article_delete', methods: ['POST'])]
     public function delete(Request $request, Article $article, ArticleRepository $articleRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $article->getUid(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $article->getUid(), (string)$request->request->get('_token'))) {
             $articleRepository->remove($article, true);
         }
 
