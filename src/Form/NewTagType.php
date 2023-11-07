@@ -30,8 +30,8 @@ class NewTagType extends AbstractType
                 'label'       => false,
                 'required'    => false,
                 'attr'        => [
-                    'placeholder'  => 'Foreground color',
                     'data-coloris' => '',
+                    'placeholder'  => '#000000'
                 ],
                 'constraints' => [
                     new CssColor([
@@ -49,8 +49,8 @@ class NewTagType extends AbstractType
                 'label'       => false,
                 'required'    => false,
                 'attr'        => [
-                    'placeholder'  => 'Background color',
                     'data-coloris' => '',
+                    'placeholder'  => '#000000'
                 ],
                 'constraints' => [
                     new CssColor([

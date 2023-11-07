@@ -6,6 +6,7 @@ use App\Entity\Tag;
 use App\Form\TagType;
 use App\Repository\TagRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -31,16 +32,22 @@ class TagController extends AbstractController
         $tag->setBgColor('#64748b');
 
         $form = $this->createForm(TagType::class, $tag);
+        $form->add('saveAndAdd', SubmitType::class, ['label' => 'Save & add more']);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $tagRepository->save($tag, true);
 
-            return $this->redirectToRoute('admin_tag_index', [], Response::HTTP_SEE_OTHER);
+            $nextAction = $form->get('saveAndAdd')->isClicked()
+                ? 'admin_tag_new'
+                : 'admin_tag_index';
+
+            return $this->redirectToRoute($nextAction);
         }
 
         return $this->render('admin/tag/new.html.twig', [
-            'tag' => $tag,
+            'tag'  => $tag,
             'form' => $form,
             'tags' => $tagRepository->findAll(),
         ]);
@@ -60,7 +67,7 @@ class TagController extends AbstractController
         }
 
         return $this->render('admin/tag/edit.html.twig', [
-            'tag' => $tag,
+            'tag'  => $tag,
             'form' => $form,
         ]);
     }
@@ -68,7 +75,7 @@ class TagController extends AbstractController
     #[Route('/{id}', name: 'admin_tag_delete', methods: ['POST'])]
     public function delete(Request $request, Tag $tag, TagRepository $tagRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$tag->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $tag->getId(), $request->request->get('_token'))) {
             $tagRepository->remove($tag, true);
         }
 

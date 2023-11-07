@@ -1,6 +1,6 @@
 {{ form_start(form) }}
 
-<div class="mt-4 flex flex-col flex-wrap content-center justify-center gap-4">
+<div class="mt-4 flex flex-wrap content-center justify-center gap-4 items-baseline">
     <div class="flex flex-col gap-2">
         {{ form_label(form.name, 'Name*', { 'label_attr': { 'class': 'text-slate-900 dark:text-slate-100' }}) }}
         {{ form_widget(form.name, {'attr': {
@@ -26,6 +26,10 @@
 </div>
 
 <div class="mt-8 mb-16 flex justify-center gap-2">
-    <button class="rounded bg-slate-100 px-4 py-2 text-sm font-medium transition hover:bg-slate-600 hover:text-slate-100 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:hover:text-slate-100">{{ button_label|default('Save tag') }}</button>
+    {% if form.saveAndAdd is defined %}
+        {{ form_row(form.saveAndAdd, {'attr': {'class': 'rounded bg-slate-100 px-4 py-2 text-sm font-medium transition hover:bg-slate-600 hover:text-slate-100 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:hover:text-slate-100'}}) }}
+    {% endif %}
+
+    <button class="rounded bg-slate-100 px-4 py-2 text-sm font-medium transition hover:bg-slate-600 hover:text-slate-100 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:hover:text-slate-100">{{ button_label|default('Save & quit') }}</button>
 </div>
 {{ form_end(form) }}

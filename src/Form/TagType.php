@@ -21,12 +21,16 @@ class TagType extends AbstractType
                     new NotBlank(),
                     new Length(['max' => 25]),
                 ],
+                'attr'        => [
+                    'placeholder' => 'Tag name',
+                ],
             ])
             ->add('fgColor', TextType::class, [
                 'label'       => 'Foreground color',
                 'required'    => false,
                 'attr'        => [
-                    'data-coloris' => ''
+                    'data-coloris' => '',
+                    'placeholder'  => '#000000'
                 ],
                 'constraints' => [
                     new CssColor([
@@ -41,10 +45,11 @@ class TagType extends AbstractType
                 ],
             ])
             ->add('bgColor', TextType::class, [
-                'label'    => 'Background color',
-                'required' => false,
-                'attr'     => [
-                    'data-coloris' => ''
+                'label'       => 'Background color',
+                'required'    => false,
+                'attr'        => [
+                    'data-coloris' => '',
+                    'placeholder'  => '#000000'
                 ],
                 'constraints' => [
                     new CssColor([
