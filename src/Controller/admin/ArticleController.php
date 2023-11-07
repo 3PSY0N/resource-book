@@ -11,6 +11,7 @@ use App\Repository\TagRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Ramsey\Uuid\Uuid;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -44,6 +45,8 @@ class ArticleController extends AbstractController
         $article = new Article();
 
         $form = $this->createForm(ArticleType::class, $article);
+        $form->add('saveAndAdd', SubmitType::class, ['label' => 'Save & add more']);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -63,7 +66,11 @@ class ArticleController extends AbstractController
             $article->setUid(Uuid::uuid7()->toString());
             $articleRepository->save($article, true);
 
-            return $this->redirectToRoute('admin_article_index', ['slug' => $article->getSlug()], Response::HTTP_SEE_OTHER);
+            $nextAction = $form->get('saveAndAdd')->isClicked()
+                ? 'admin_article_new'
+                : 'admin_article_index';
+
+            return $this->redirectToRoute($nextAction);
         }
 
         return $this->render('admin/article/new.html.twig', [
